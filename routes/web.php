@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Artisan;
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-
+use App\Http\Controllers\NoteController;
 
 use App\Models\Note;
 use App\Models\User;
@@ -58,11 +58,14 @@ Route::view('fazer-um-anuncio', 'notes.buy-index')
     ->middleware(['auth'])
     ->name('notes.buy-index');
 
-/*Volt::route('notes/{note}/edit', 'notes.edit-note')
+Volt::route('notes/{note}/edit', 'notes.edit-note')
     ->middleware(['auth'])
     ->name('notes.edit');
- */
 
+    Route::post('/checkout/{note}', [NoteController::class, 'checkout'])->name('checkout');
+    Route::get('/success', [NoteController::class, 'success'])->name('notes.payment.checkout-success');
+Route::get('/cancel', [NoteController::class, 'cancel'])->name('notes.payment.checkout-cancel');
+Route::post('/webhook', [NoteController::class, 'webhook'])->name('checkout.webhook');
   
     
     

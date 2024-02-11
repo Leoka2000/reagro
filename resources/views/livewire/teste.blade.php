@@ -2,20 +2,23 @@
 
 use Livewire\Volt\Component;
 use WireUi\Traits\Actions;
+use App\Models\User;
+use App\Models\Note;
+use Illuminate\Support\Facades\Log;
 
 new class extends Component {
-    use Actions;
 
-        public function successDialog(): void
+      public function displayConsole()
+
+    
     {
-        $this->dialog()->show([
-            'icon' => 'success',
-            'title' => 'Success Dialog!',
-            'description' => 'This is a description.',
-        ]);
+           $userVariable = auth()->user();
+            $numberNotes = $userVariable->notes()->get();
+            error_log($numberNotes);
     }
+
 }; ?>
 
 <div >
-  <x-button primary sm rounded label='Test Button' wire:click="successDialog" />
+  <x-button primary sm rounded label='Test Button' wire:click="displayConsole" />
 </div>

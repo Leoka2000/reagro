@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('product_quantity');
             $table->string('typeof_frete')->nullable();
             $table->string('address_city');
+            $table->boolean('paid')->default(false);
             $table->string('company_email');
             $table->string('postal_code');
             $table->string('companyState')->nullable();

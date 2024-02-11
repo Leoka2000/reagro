@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Models\Note;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Faker\Provider\Image as ImageProvider;
 
 class NoteFactory extends Factory
 {

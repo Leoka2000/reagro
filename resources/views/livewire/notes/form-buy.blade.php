@@ -5,6 +5,7 @@ use App\Models\Note;
 use App\Models\User;
 use WireUi\Traits\Actions;
 
+
 new class extends Component {
     use Actions;
 
@@ -58,13 +59,14 @@ new class extends Component {
 <div>
     @if ($notes->isEmpty())
         <div class="text-center dark:text-gray-300">
-            <p class="text-xl font-bold">No notes yet</p>
-            <p class="text-sm">Let's create your first note to send.</p>
-            <x-button primary icon-right="plus" class="mt-6" href="{{ route('notes.buy-index') }}" wire:navigate>Create
+            <p class="text-xl font-bold">Nenhum anúncio disponível</p>
+            <p class="text-sm">Vamos criar o seu primeiro anúncio?</p>
+            <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Create
                 note</x-button>
         </div>
     @else
         <div>
+        <livewire:teste />
 
             <header class='flex items-center justify-start gap-1 dark:text-gray-300'>
                 <div class='flex justify-center w-full gap-3 gp-2 dm:w-1/4'>
@@ -103,9 +105,16 @@ new class extends Component {
                         <x-card class='my-2 ' wire:key='{{ $note->id }}'>
                             <header>
                                 <div class="flex justify-center">
+                                    {{--  
                                     <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
                                         <img class='object-cover w-full h-full rounded-md bg-slate-300'
                                             src="{{ asset('storage/' . $note->image) }}" alt="sheesh"
+                                            title="sheesh" />
+                                    </div>
+                                    --}}
+                                     <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
+                                        <img class='object-cover w-full h-full rounded-md bg-slate-300'
+                                            src="{{ $note->image }}" alt="sheesh"
                                             title="sheesh" />
                                     </div>
                                 </div>
@@ -133,18 +142,14 @@ new class extends Component {
                             <div class='flex items-center justify-end gap-2'>
                                 @can('update', $note)
                                     <!-- Update button -->
-                                    <x-button.circle href="{{ route('notes.edit', $note) }}" green outline
+                                    <x-button.circle href="{{ route('notes.edit', $note) }}" sm green outline
                                         icon="pencil-alt"></x-button.circle>
-                                        
                                 @endcan
 
 
                                 @can('delete', $note)
                                     <x-button.circle sm icon="trash" red outline
                                         wire:click="openModal('{{ $note->id }}')"></x-button.circle>
-                                @else
-                                    <x-button.circle sm icon="trash"
-                                        wire:click="delete('{{ $note->id }}')"></x-button.circle>
                                 @endcan
                             </div>
                             <div class='w-full mt-5'>
@@ -153,14 +158,14 @@ new class extends Component {
                             </div>
                         </x-card>
                         @if ($showModal)
-                            <x-modal wire:model="showModal" class="text-gray-300 dark:text-gray-800"
-                                title="Simple Modal">
+                            <x-modal wire:model="showModal" class="" title="Simple Modal">
                                 <div
                                     class='flex flex-col h-auto gap-2 p-12 bg-gray-900 dark:text-gray-300 w-96 rounded-xl '>
-                                    <p class='mb-4 sm:text-base'>Are you sure you want to delete the profile?</p>
-                                    <x-button primary icon='arrow-left' wire:click="closeModal">Back</x-button>
+                                    <p class='mb-4 text-gray-300 bg-gray-900 sm:text-base'>Tem certeza que dejesas
+                                        deletar o anúncio?</p>
+                                    <x-button primary icon='arrow-left' wire:click="closeModal">Sair</x-button>
                                     <x-button flat negative outline icon='trash'
-                                        wire:click="delete('{{ $noteToDelete->id }}')">Delete</x-button>
+                                        wire:click="delete('{{ $noteToDelete->id }}')">Continuar</x-button>
                                 </div>
                             </x-modal>
                         @endif
@@ -169,15 +174,3 @@ new class extends Component {
             </main>
     @endif
 </div>
-
-
-
-
-{{--  <div class='flex items-center justify-center max-width-96'>
-        <div>
-        
-    
-        </div>
-<div class='mt-5'>
-        <x-badge.circle for='select' positive outline md icon="filter" />
-        </div> --}}
