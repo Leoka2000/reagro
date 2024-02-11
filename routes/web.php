@@ -36,6 +36,10 @@ Route::view('notes', 'notes.show-notes')
 Route::view('my-notes', 'notes.my-notes')
     ->middleware(['auth'])
     ->name('notes.my-notes');
+    
+    Volt::route('profile/{note}/edit', 'notes.edit-note')
+    ->middleware(['auth'])
+    ->name('notes.edit');
 
     
 Route::view('quero-vender', 'notes.sell-index')
@@ -65,10 +69,7 @@ Route::view('fazer-um-anuncio', 'notes.buy-index')
 
       
  Route::get('notes/{note}', function (Note $note) {
-    if (! $note->is_published) {
-        abort(404);
-    }
-
+    
     $user = $note->user;
 
     return view('notes.view', ['note' => $note, 'user' => $user]);

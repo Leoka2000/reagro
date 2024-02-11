@@ -68,7 +68,7 @@ new class extends Component {
                 'price_perunit' => $this->pricePerUnit,
                 'description' => $this->companyDescription,
                 'residue_type' => $this->residueType,
-                'image' => $this->companyImage->store('company-images', 'public'),
+                'image' => $this->companyImage->store('storage', 'public'),
                 'price' => $this->companyPrice,
                 'accept_terms' => $this->acceptTerms,
             ]);

@@ -3,8 +3,38 @@
 use Livewire\Volt\Component;
 use App\Models\Note;
 use App\Models\User;
+use WireUi\Traits\Actions;
 
 new class extends Component {
+    use Actions;
+
+    public $showModal = false;
+    public $noteToDelete;
+
+    public function openModal($noteId)
+    {
+        $this->noteToDelete = Note::find($noteId);
+        $this->showModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
+
+    public function delete($noteId)
+    {
+        $note = Note::where('id', $noteId)->first();
+        $this->authorize('delete', $note);
+        $note->delete();
+        $this->closeModal();
+
+        $this->dialog()->show([
+            'icon' => 'success',
+            'title' => 'Anúncio deletado!',
+        ]);
+    }
+
     public function with(): array
     {
         return [
@@ -30,7 +60,7 @@ new class extends Component {
         <div class="text-center dark:text-gray-300">
             <p class="text-xl font-bold">No notes yet</p>
             <p class="text-sm">Let's create your first note to send.</p>
-            <x-button primary icon-right="plus" class="mt-6" href="{{ route('notes.create') }}" wire:navigate>Create
+            <x-button primary icon-right="plus" class="mt-6" href="{{ route('notes.buy-index') }}" wire:navigate>Create
                 note</x-button>
         </div>
     @else
@@ -73,9 +103,10 @@ new class extends Component {
                         <x-card class='my-2 ' wire:key='{{ $note->id }}'>
                             <header>
                                 <div class="flex justify-center">
-                                    <div class='flex items-center justify-center md:w-full md:h-full'>
+                                    <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
                                         <img class='object-cover w-full h-full rounded-md bg-slate-300'
-                                            src="{{ asset('logo.png') }}" alt="sheesh" title="sheesh" />
+                                            src="{{ asset('storage/' . $note->image) }}" alt="sheesh"
+                                            title="sheesh" />
                                     </div>
                                 </div>
                             </header>
@@ -99,16 +130,40 @@ new class extends Component {
                                     </li>
                                 </ul>
                             </div>
-                            <div class='flex items-center justify-end gap-1'>
+                            <div class='flex items-center justify-end gap-2'>
+                                @can('update', $note)
+                                    <!-- Update button -->
+                                    <x-button.circle href="{{ route('notes.edit', $note) }}" green outline
+                                        icon="pencil-alt"></x-button.circle>
+                                        
+                                @endcan
 
-                                <x-button.circle  sm icon="pencil-alt"></x-button.circle>
-                                <x-button.circle href="{{ route('notes.view', $note) }}" sm icon="eye" outline></x-button.circle>
-                                <x-button.circle sm icon="trash" outline></x-button.circle>
-                                </div>
-                                <div class='w-full mt-5'> 
-                                <x-button sm class='w-full h-12' icon=shopping-cart primary spinner label='Quero comprar' />
-                                </div>
+
+                                @can('delete', $note)
+                                    <x-button.circle sm icon="trash" red outline
+                                        wire:click="openModal('{{ $note->id }}')"></x-button.circle>
+                                @else
+                                    <x-button.circle sm icon="trash"
+                                        wire:click="delete('{{ $note->id }}')"></x-button.circle>
+                                @endcan
+                            </div>
+                            <div class='w-full mt-5'>
+                                <x-button rounded sm class='w-full h-12' href="{{ route('notes.view', $note) }}"
+                                    icon='shopping-cart' primary spinner label='Quero comprar' />
+                            </div>
                         </x-card>
+                        @if ($showModal)
+                            <x-modal wire:model="showModal" class="text-gray-300 dark:text-gray-800"
+                                title="Simple Modal">
+                                <div
+                                    class='flex flex-col h-auto gap-2 p-12 bg-gray-900 dark:text-gray-300 w-96 rounded-xl '>
+                                    <p class='mb-4 sm:text-base'>Are you sure you want to delete the profile?</p>
+                                    <x-button primary icon='arrow-left' wire:click="closeModal">Back</x-button>
+                                    <x-button flat negative outline icon='trash'
+                                        wire:click="delete('{{ $noteToDelete->id }}')">Delete</x-button>
+                                </div>
+                            </x-modal>
+                        @endif
                     @endforeach
                 </div>
             </main>
