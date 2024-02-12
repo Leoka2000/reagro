@@ -5,7 +5,6 @@ use App\Models\Note;
 use App\Models\User;
 use WireUi\Traits\Actions;
 
-
 new class extends Component {
     use Actions;
 
@@ -61,11 +60,12 @@ new class extends Component {
         <div class="text-center dark:text-gray-300">
             <p class="text-xl font-bold">Nenhum anúncio disponível</p>
             <p class="text-sm">Vamos criar o seu primeiro anúncio?</p>
-            <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Criar um anúncio</x-button>
+            <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Criar um
+                anúncio</x-button>
         </div>
     @else
         <div>
-        <livewire:teste />
+            <livewire:teste />
 
             <header class='flex items-center justify-start gap-1 dark:text-gray-300'>
                 <div class='flex justify-center w-full gap-3 gp-2 dm:w-1/4'>
@@ -104,28 +104,33 @@ new class extends Component {
                         <x-card class='my-2 ' wire:key='{{ $note->id }}'>
                             <header>
                                 <div class="flex justify-center">
-                                    {{--  
+
                                     <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
+                                        @php
+                                            // Split the image string into an array using a delimiter (assuming comma here)
+                                            $imageArray = explode(',', $note->image);
+
+                                            // Select the first element of the array
+                                            $firstImage = reset($imageArray);
+                                        @endphp
+
                                         <img class='object-cover w-full h-full rounded-md bg-slate-300'
-                                            src="{{ asset('storage/' . $note->image) }}" alt="sheesh"
-                                            title="sheesh" />
+                                            src="{{ asset('storage/' . $firstImage) }}" alt="Image" title="sheesh" />
                                     </div>
-                                    --}}
-                                     <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
-                                        <img class='object-cover w-full h-full rounded-md bg-slate-300'
-                                            src="{{ $note->image }}" alt="sheesh"
-                                            title="sheesh" />
-                                    </div>
+
+
                                 </div>
                             </header>
                             <div class='mt-5'>
                                 <div class='pb-4'>
-                                    <p class='text-sm font-bold break-words text-gray-950 dark:text-gray-200'>{{ Str::limit($note->description, 120) }}
-                                    <p>
+                                    <p class='text-sm font-bold break-words text-gray-950 dark:text-gray-200'>
+                                        {{ Str::limit($note->description, 120) }}
+
                                 </div>
                                 <div>
                                     <div class=pb-4>
-                                        </p class='text-gray-900 dark:text-gray-300'> {{$note->product_quantity}} / {{ $note->price_perunit }}  </p>
+                                        </p class='text-gray-900 dark:text-gray-300'> {{ $note->product_quantity }} /
+                                        {{ $note->price_perunit }} </p>
                                     </div>
                                 </div>
                                 <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
@@ -154,6 +159,7 @@ new class extends Component {
                                 <x-button rounded sm class='w-full h-12' href="{{ route('notes.view', $note) }}"
                                     icon='shopping-cart' primary spinner label='Quero comprar' />
                             </div>
+
                         </x-card>
                         @if ($showModal)
                             <x-modal wire:model="showModal" class="" title="Simple Modal">
@@ -165,6 +171,7 @@ new class extends Component {
                                     <x-button flat negative outline icon='trash'
                                         wire:click="delete('{{ $noteToDelete->id }}')">Continuar</x-button>
                                 </div>
+
                             </x-modal>
                         @endif
                     @endforeach

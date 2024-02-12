@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <main class='py-4 text-gray-800 dark:text-gray-300'>
+    <main class='px-3 my-4 text-gray-800 dark:text-gray-300'>
         <x-card title="Compra realizada">
             <x-slot name="action">
                 <x-badge positive lg rounded icon="check" class='w-6 h-6 ' />

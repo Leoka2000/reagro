@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
+
 ?>
 
 <div>
+
     <x-app-layout>
         <div class='px-3 py-12 sm:px-10 lg:pr-3 lg:pl-20 xl:pr-20 xl:pl-44'>
             <x-slot name="header">
@@ -17,6 +20,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
                     Produto -> nome
                 </h2>
             </x-slot>
+             @foreach (explode(',', $note->image) as $imageLink)
+            <div class='flex items-center justify-center md:w-64 md:h-64'>
+                <img class='object-cover w-full h-full rounded-md bg-slate-300'
+                     src="{{ asset('storage/' . $imageLink) }}" alt="Image" title="Image" />
+                    
+            </div>
+        @endforeach
             <header>
                 <div class='flex items-center justify-center'>
                     <div class='w-full h-full sm:w-48 sm:h-48'>
@@ -37,8 +47,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
                                     <div class="flex justify-center">
                                         <div class='flex items-center justify-center md:w-64 md:h-64'>
                                             <img class='object-cover w-full h-full rounded-md bg-slate-300'
-                                                src="{{ $note->image }}" alt="sheesh" title="sheesh" />
+                                                src="{$note->image }}" alt="sheesh" title="sheesh" />
                                         </div>
+                                            
                                     </div>
                                 </header>
                                 <div class='mt-5'>

@@ -27,7 +27,7 @@ new class extends Component {
     public $companyDescription;
     public $acceptTerms;
 
-    public $companyImage;
+    public $companyImage = [];
 
     public function submit()
     {
@@ -43,13 +43,19 @@ new class extends Component {
 
             'companyPhone' => ['required', 'numeric'],
             'deliveryAddress' => ['required', 'string', 'min:5'], //street,
-            'companyImage' => 'file|mimes:png,jpg,pdf|max:102400',
+           'companyImage.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:102400',
             'pricePerUnit' => ['string', 'min:2'],
             'companyDescription' => ['required', 'string', 'min:30'],
             'residueType' => ['required', 'string', 'min:3'],
-            'companyImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
             'acceptTerms' => ['required', 'boolean'],
         ]);
+
+        $images = [];
+        foreach ($this->companyImage as $image) {
+            $imagePath = $image->store('company_images', 'public'); // Store images in storage/app/public/company_images
+            $images[] = $imagePath; // Store the image path in the array
+        }
 
         auth()
             ->user()
@@ -64,19 +70,18 @@ new class extends Component {
                 'postal_code' => $this->companyPostalCode,
                 'company_phone' => $this->companyPhone,
                 'delivery_address' => $this->deliveryAddress,
-
+               'image' => implode(',', $images),
                 'price_perunit' => $this->pricePerUnit,
                 'description' => $this->companyDescription,
                 'residue_type' => $this->residueType,
-                'image' => $this->companyImage->store('storage', 'public'),
                 'price' => $this->companyPrice,
                 'accept_terms' => $this->acceptTerms,
             ]);
 
         $this->dialog()->show([
             'icon' => 'success',
-            'title' => 'Anúncio publicado!!',
-            'description' => 'Agora, voce poderá vizualizar, editar, ou deletar o seu anúncio em nossa plataforma',
+            'title' => 'Anúncio publicado!',
+            'description' => 'Agora, você poderá vizualizar, editar, ou deletar o seu anúncio em nossa plataforma',
         ]);
     }
 }; ?>
@@ -110,13 +115,14 @@ new class extends Component {
 
             <x-native-select class='z-10' label="Selecione o tipo de unidade" placeholder="Select an option"
                 wire:model.defer="pricePerUnit" :options="['Litro', 'Mililitros', 'Grama', 'Kilo']" />
-            <x-input label="Selecione o preço por unidade (apenas números)" placeholder="200,00" wire:model.defer="productQuantity" />
-            <x-input type="file" wire:model="companyImage" label='Fotos que desejas mostrar o cliente'
-                placeholder="Upload de fotos" />
+            <x-input label="Selecione o preço por unidade (apenas números)" placeholder="200,00"
+                wire:model.defer="productQuantity" />
+            <x-input multiple type="file" wire:model="companyImage" label='Selecione fotos que deseja mostrar ao cliente. (Suas fotos não podem ser maiores que 1,5MB)'
+                placeholder="Upload de fotos"/>
 
 
-              
-       
+
+
             <x-input label="Rua" placeholder="" wire:model.defer="deliveryAddress" />
             <div class="col-span-1 sm:col-span-2">
 
