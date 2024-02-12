@@ -133,15 +133,15 @@ return [
         ],
         'dropdown' => [
             'class' => Components\Dropdown::class,
-            'alias' => 'dropdown',
+            'alias' => 'wire-dropdown',
         ],
         'dropdown.item' => [
             'class' => Components\Dropdown\DropdownItem::class,
-            'alias' => 'dropdown.item',
+            'alias' => 'wire-dropdown.item',
         ],
         'dropdown.header' => [
             'class' => Components\Dropdown\DropdownHeader::class,
-            'alias' => 'dropdown.header',
+            'alias' => 'wire-dropdown.header',
         ],
         'notifications' => [
             'class' => Components\Notifications::class,

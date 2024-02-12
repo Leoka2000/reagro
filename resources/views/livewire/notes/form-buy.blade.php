@@ -120,13 +120,12 @@ new class extends Component {
                             </header>
                             <div class='mt-5'>
                                 <div class='pb-4'>
-                                    <p class='text-sm font-bold text-gray-950 dark:text-gray-200'>Residuo quimico para
-                                        gricultura fazendeira para feertilizar diferentrs tipos de plantass
+                                    <p class='text-sm font-bold break-words text-gray-950 dark:text-gray-200'>{{ Str::limit($note->description, 120) }}
                                     <p>
                                 </div>
                                 <div>
                                     <div class=pb-4>
-                                        </p class='text-gray-900 dark:text-gray-300'>$74.95</p>
+                                        </p class='text-gray-900 dark:text-gray-300'> {{$note->product_quantity}} / {{ $note->price_perunit }}  </p>
                                     </div>
                                 </div>
                                 <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>

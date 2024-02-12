@@ -43,15 +43,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
                                 </header>
                                 <div class='mt-5'>
                                     <div class='pb-4'>
-                                        <p class='text-sm font-bold text-gray-950 dark:text-gray-200'>Residuo
-                                            quimico
-                                            para
-                                            gricultura fazendeira para feertilizar diferentrs tipos de plantass
+                                        <p class='text-sm font-bold text-gray-950 dark:text-gray-200'>
+                                            {{ $note->product_name }}
                                         <p>
                                     </div>
                                     <div>
                                         <div class=pb-4>
-                                            </p class='text-gray-900 dark:text-gray-300'>$74.95</p>
+                                            </p class='text-gray-900 dark:text-gray-300'>{{ $note->product_quantity }}
+                                            BRL / {{ $note->price_perunit }} </p>
                                         </div>
                                     </div>
                                     <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
@@ -66,20 +65,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
                                     <div class='flex flex-col'>
                                         <div>
                                             <div class='w-full mt-5'>
-                                                <x-card title="Descricoe do produto">
+                                                <x-card title="Descrição do produto">
                                                     <p
                                                         class='mb-2 text-sm text-gray-500 break-words dark:text-gray-400'>
-                                                        dscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscaodscricaodscricaodscricaodscricaodscricao
+                                                        {{ $note->description }}
                                                     </p>
                                                     <p
                                                         class='mb-2 text-sm text-gray-500 break-words dark:text-gray-400'>
-                                                        dscricaod dscricaod dscricaod dscricaod dscricaod dscricaod
-                                                        dscricaod dscricaod dscricaod dscricaod dscricaod dscricaod
-                                                        dscricaod dscricaod dscricaod dscricaod dscricaod dscricaod
-                                                        dscricaod dscricaod dscricaod dscricaod dscricaod dscricaod
-                                                        dscricaod
-                                                        dscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricaodscricao
+
                                                     </p>
+                                                   
+                                                    <x-slot name="footer" class="flex w-full h-full">
+                                <p
+                                                        class='text-gray-900 break-words text-md dark:text-gray-400'>
+                                                        Informações do vendedor:
+                                                    </p>
+                                                    <p
+                                                        class='mb-2 text-sm text-gray-500 break-words dark:text-gray-400'>
+Somos uma empresa de cométicos para criancas
+                                                    </p>
+
+
+                            </x-slot>
+                                                    <p>
                                                 </x-card>
                                             </div>
                                         </div>
@@ -97,8 +105,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
                                     <p class='font-thin text-gray-500 dark:text-gray-400'>{{ $note->product_name }}</p>
                                 </div>
                                 <div class='flex items-center justify-start gap-2 '>
-                                    <p class='text-lg text-gray-500 dark:text-gray-400'>Preco por unidade:</p>
-                                    <p class='text-2xl text-gray-900 dark:text-gray-200'> {{ $note->price_perunit }}
+                                    <p class='text-lg text-gray-500 dark:text-gray-400'>Tipo:</p>
+                                    <p class='text-3xl text-gray-900 dark:text-gray-200'> {{ $note->residue_type }}
                                     </p>
                                 </div>
 
@@ -106,7 +114,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
                             <div class='flex flex-col xl:w-96'>
                                 <div>
                                     <header class='mt-10 mb-5'>
-                                        <p class='text-base font-bold text-gray-900 dark:text-gray-200'>Especificacoes
+                                        <p class='text-base font-bold text-gray-900 dark:text-gray-200'>Especificações
                                             do
                                             produto
                                         </p>
@@ -140,8 +148,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
                                     </span>
                                     <div class='font-thin text-gray-500 dark:text-gray-400'>
-                                        Quantidade disponíivel:
-                                        <strong class='text-gray-800 dark:text-gray-300'> {{ $note->product_quantity }}
+                                        Preço por unidade
+                                        <strong class='text-gray-800 dark:text-gray-300'>{{ $note->product_quantity }}
+                                            / {{ $note->price_perunit }}
                                             <strong>
                                     </div>
                                 </div>
@@ -152,8 +161,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
                                     </span>
                                     <div class='font-thin text-gray-500 dark:text-gray-400'>
-                                        Cidade do produto:
-                                        <strong class='text-gray-800 dark:text-gray-300'> {{ $note->address_city }}
+                                        Estado:
+                                        <strong class='text-gray-800 dark:text-gray-300'> {{ $note->company_state }}
                                             <strong>
                                     </div>
                                 </div>

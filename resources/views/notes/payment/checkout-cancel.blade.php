@@ -5,10 +5,19 @@ use Livewire\Volt\Component;
 new class extends Component {}; ?>
 
 <div>
+
     <x-app-layout>
-        <div class='flex flex-col items-center justify-between gap-2 pt-32 text-gray-800 dark:text-gray-300'>
-            Compra cancelada
-            <x-button icon="arrow-left" class="mb-8" href="{{ route('dashboard') }}"> Voltar</x-button>
-            <div>
+        <div class='flex items-center justify-center mx-96 sm:p-12'>
+            <x-card title="Compra cancelada">
+                <x-slot name="action">
+                    <x-badge negative lg rounded icon="x-circle" class='w-6 h-6 ' />
+                </x-slot>
+                <p class='mb-12'>
+               
+                <p>
+                <div class='w-full'>
+                <x-button icon="arrow-left" rounded href="{{ route('dashboard') }}" negative class="w-full"> Voltar</x-button>
+                </div>
+            </x-card>
     </x-app-layout>
 </div>

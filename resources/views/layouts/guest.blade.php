@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
-    <title>{{ config('app.name', 'Megy a Meló') }}</title>
+    <title>{{ config('app.name', 'ReAgro') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,10 +14,11 @@
     <wireui:scripts />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+     @wireUiScripts
 </head>
 
 <body class="font-sans antialiased text-gray-900 dark dark:text-gray-300">
-
+  <x-dialog />
 
 
     <div class="flex flex-col items-center min-h-screen pt-6 bg-gray-100 sm:justify-center sm:pt-0 dark:bg-gray-900">

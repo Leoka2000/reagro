@@ -35,7 +35,7 @@ new class extends Component {
             'companyName' => ['required', 'string', 'min:3'],
             'companyEmail' => ['required', 'email'],
             'productName' => ['required', 'string', 'min:3'],
-            'productQuantity' => ['required', 'string'],
+            'productQuantity' => ['required', 'numeric'],
 
             'companyState' => ['required', 'string'],
             'addressCity' => ['required', 'string'],
@@ -103,14 +103,14 @@ new class extends Component {
                 </div>
             </div>
 
-            <x-native-select label="Selecione o tipo de produto" placeholder="asokakksaksokoass" :options="['Sólido', 'Líquido', 'Semi-sólido']"
+            <x-native-select label="Selecione o tipo de produto" placeholder="Sólido" :options="['Sólido', 'Líquido', 'Semi-sólido']"
                 wire:model="residueType" />
 
             {{--    :options="$this->countries()" --}}
 
-            <x-native-select class='z-10' label="Perco por unidade" placeholder="Select an option"
-                wire:model.defer="pricePerUnit" :options="['30kg/r$', '100kg/rs']" />
-            <x-input label="Quantidade de venda" placeholder="300kg" wire:model.defer="productQuantity" />
+            <x-native-select class='z-10' label="Selecione o tipo de unidade" placeholder="Select an option"
+                wire:model.defer="pricePerUnit" :options="['Litro', 'Mililitros', 'Grama', 'Kilo']" />
+            <x-input label="Selecione o preço por unidade (apenas números)" placeholder="200,00" wire:model.defer="productQuantity" />
             <x-input type="file" wire:model="companyImage" label='Fotos que desejas mostrar o cliente'
                 placeholder="Upload de fotos" />
 

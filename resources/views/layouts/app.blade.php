@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ReAgro') }}</title>
     {{-- script for dark mode --}}
     <script>
         window.themeSwitcher = function() {
@@ -27,10 +27,13 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <wireui:scripts />
+     
 
     <!-- Scripts -->
+       <wireui:scripts />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @wireUiScripts
+    
 </head>
 
 <body x-data="themeSwitcher()" :class="{ 'dark': switchOn } relative">

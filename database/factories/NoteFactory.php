@@ -27,7 +27,7 @@ class NoteFactory extends Factory
             'address_city' => $this->faker->city,
             'company_email' => $this->faker->email,
             'postal_code' => $this->faker->postcode,
-            'companyState' => $this->faker->state,
+            'company_state' => $this->faker->state,
             'company_phone' => $this->faker->phoneNumber,
             'delivery_address' => $this->faker->streetAddress,
             'price' => $this->faker->randomFloat(2, 10, 1000),

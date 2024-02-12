@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('paid')->default(false);
             $table->string('company_email');
             $table->string('postal_code');
-            $table->string('companyState')->nullable();
+            $table->string('company_state')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('delivery_address');     // Delivery address eh na vdd a 'rua'
             $table->decimal('price')->nullable();
