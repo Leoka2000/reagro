@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Type\Decimal;
 
 return new class extends Migration
 {
@@ -25,8 +26,8 @@ return new class extends Migration
             $table->string('companyState')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('delivery_address');     // Delivery address eh na vdd a 'rua'
-            $table->string('price')->nullable();
-            $table->string('price_perunit')->nullable();
+            $table->decimal('price')->nullable();
+            $table->decimal('price_perunit')->nullable();
             $table->text('description')->nullable();
             $table->string('residue_type')->nullable();
             $table->string('image');

@@ -61,8 +61,7 @@ new class extends Component {
         <div class="text-center dark:text-gray-300">
             <p class="text-xl font-bold">Nenhum anúncio disponível</p>
             <p class="text-sm">Vamos criar o seu primeiro anúncio?</p>
-            <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Create
-                note</x-button>
+            <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Criar um anúncio</x-button>
         </div>
     @else
         <div>

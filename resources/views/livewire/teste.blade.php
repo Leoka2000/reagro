@@ -12,9 +12,13 @@ new class extends Component {
 
     
     {
+         $user = auth()->user();
+            $orders = $orders->orders()->get();
+
+       
            $userVariable = auth()->user();
             $numberNotes = $userVariable->notes()->get();
-            error_log($numberNotes);
+            error_log($orders);
     }
 
 }; ?>
