@@ -156,7 +156,7 @@ new class extends Component {
                                 @endcan
                             </div>
                             <div class='w-full mt-5'>
-                                <x-button rounded sm class='w-full h-12' href="{{ route('notes.view', $note) }}"
+                                <x-button rounded sm class='w-full h-12' href="{{ route('notes.view-offer', $note) }}"
                                     icon='shopping-cart' primary spinner label='Quero comprar' />
                             </div>
 

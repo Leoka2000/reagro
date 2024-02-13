@@ -27,7 +27,7 @@ new class extends Component {
        
            $userVariable = auth()->user();
             $numberNotes = $userVariable->email;
-            $numberNotes = $userVariable->name;
+                
          
             error_log( $numberNotes);
     }

@@ -26,8 +26,8 @@
             <a href="/" wire:navigate>
                 <div class="flex justify-center">
                     <div class='flex items-center justify-center w-24 h-24 mt-2'>
-                        <img class='object-cover w-full h-full rounded-md' src="{{ asset('logo.png') }}" alt="sheesh"
-                            title="sheesh" />
+                        <img class='object-cover w-full h-full rounded-md' src="{{ asset('logo.png') }}" alt="logo"
+                            title="logo" />
                     </div>
                 </div>
             </a>

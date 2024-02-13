@@ -58,9 +58,6 @@ Route::view('fazer-um-anuncio', 'notes.buy-index')
     ->middleware(['auth'])
     ->name('notes.buy-index');
 
-Volt::route('notes/{note}/edit', 'notes.edit-note')
-    ->middleware(['auth'])
-    ->name('notes.edit');
 
     Route::post('/checkout/{note}', [NoteController::class, 'checkout'])->name('checkout');
     Route::get('/success', [NoteController::class, 'success'])->name('notes.payment.checkout-success');
@@ -71,12 +68,7 @@ Route::post('/webhook', [NoteController::class, 'webhook'])->name('checkout.webh
     
 
       
- Route::get('notes/{note}', function (Note $note) {
-    
-    $user = $note->user;
-
-    return view('notes.view', ['note' => $note, 'user' => $user]);
-})->name('notes.view');
+Route::get('notes/view-offer/{note}', [NoteController::class, 'viewOffer'])->name('notes.view-offer');
 
 
 require __DIR__ . '/auth.php';

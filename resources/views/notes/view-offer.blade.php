@@ -1,40 +1,35 @@
 <?php
 
-use function Livewire\Volt\{state};
-use App\Models\Order;
+use Livewire\Volt\Component;
+use Livewire\Attributes\Layout;
+  use App\Models\Order;
 use App\Models\Note;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Console\View\Components\Component;
+use WireUi\Traits\Actions;
 
-class IndividualProduct extends Component
-{
-    public function successDialog()
+new #[Layout('layouts.app')] class extends Component {
+   
+
+    
+ public function successDialog()
  
     {
-        $this->dialog()->show([
-            'icon' => 'success',
-            'title' => 'Success Dialog!',
-            'description' => 'This is a description.',
-        ]);
+            error_log('xereca');
     }
-
-} ?>
+    
+}; ?>
 
 <div>
-
-
     <x-app-layout>
 
         <div class='px-3 py-12 sm:px-10 lg:pr-3 lg:pl-20 xl:pr-20 xl:pl-44'>
             <x-slot name="header">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    Produto -> nome
+                    Produto -> nomeassakooas
                 </h2>
             </x-slot>
             <x-button primary sm spinner rounded label='Test Button' wire:click="successDialog" />
+            
             @foreach (explode(',', $note->image) as $imageLink)
                 <div class='flex items-center justify-center md:w-64 md:h-64'>
                     <img class='object-cover w-full h-full rounded-md bg-slate-300'
@@ -261,3 +256,4 @@ class IndividualProduct extends Component
             </div>
         </div>
     </x-app-layout>
+</div>

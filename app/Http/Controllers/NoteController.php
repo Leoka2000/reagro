@@ -16,6 +16,22 @@ use Symfony\Component\Yaml\Yaml;
 
 class NoteController extends Controller
 {
+
+    public function viewOffer(Note $note)
+    {
+        // Your logic to fetch additional data or perform actions
+        // related to the specific product identified by $note->id
+
+        $this->successDialog(); // Call the successDialog function
+
+        return view('notes.view-offer', ['note' => $note]);
+    }
+
+    public function successDialog()
+    {
+        error_log('buceta');
+    }
+    
     public function checkout(Note $note)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
