@@ -30,7 +30,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
             </x-modal>
         @endif
 
-        <div class='px-3 py-12 sm:px-10 lg:pr-3 lg:pl-20 xl:pr-20 xl:pl-44'>
+        <div class='flex px-3 py-12 sm:px-10 lg:pr-3 lg:pl-20 xl:pr-20 xl:pl-44'>
             <x-slot name="header">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     {{ $note->product_name }}
@@ -38,20 +38,12 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                 </h2>
             </x-slot>
 
-
-
-
-            <header>
-                {{--
-                <livewire:teste-modal />
-                  --}}
-            </header>
-
+<div>
             <div>
                 <div class='flex flex-col items-center justify-center w-full gap-4 xl:items-start xl:flex-row'>
 
                     <div class='flex justify-center w-full gap-3 md:w-3/4'>
-                        <x-card class='w-full max-w-3xl my-2 '>
+                        <x-card class='w-full max-w-3xl '>
 
                             <div class=''>
                                 <div class='pb-4'>
@@ -66,14 +58,14 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                     </div>
                                 </div>
                                 <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
-                                    <li class='flex items-center w-full mx-2 text-xs text-gray-500 dark:text-gray-400'>
+                                    <li class='flex items-center w-full text-xs text-gray-500 dark:text-gray-400'>
                                         <x-icon name="check" green xl class="w-4 h-4" /> Frete gratis
                                     </li>
                                     <li class='flex items-center text-xs text-gray-500 dark:text-gray-400'>
                                         <x-icon name="check" green xl class="w-4 h-4" /> Disponível
                                     </li>
                                 </ul>
-                                <div class='grid grid-cols-1 gap-3 my-5 md:grid-cols-2 lg:grid-cols-3'>
+                                <div class='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3'>
                                     @foreach (explode(',', $note->image) as $imageLink)
                                         <div
                                             class='relative flex flex-col items-center border-gray-300 rounded-md dark:border-gray-700'>
@@ -279,6 +271,9 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
 
                             </p>
                         </div>
+
+
+                        
                         <p>
                 </x-card>
             </div>

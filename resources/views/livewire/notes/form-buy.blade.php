@@ -7,9 +7,11 @@ use WireUi\Traits\Actions;
 
 new class extends Component {
     use Actions;
-
+   public $selectedType = 'None';
+   
     public $showModal = false;
     public $noteToDelete;
+  
 
     public function openModal($noteId)
     {
@@ -37,10 +39,18 @@ new class extends Component {
 
     public function with(): array
     {
+        $notes = $this->getFilteredNotes();
         return [
-            'notes' => Note::all(),
+            'notes' => $notes,
         ];
     }
+
+         private function getFilteredNotes()
+    {
+        // Filter notes based on the selected area
+        return $this->selectedType == 'None' ? Note::all() : Note::where('residue_type', $this->selectedType)->get();
+    }
+
     public function placeholder()
     {
         return <<<'HTML'
@@ -65,37 +75,50 @@ new class extends Component {
         </div>
     @else
         <div>
-            <livewire:teste />
 
-            <header class='flex items-center justify-start gap-1 dark:text-gray-300'>
-                <div class='flex justify-center w-full gap-3 gp-2 dm:w-1/4'>
-                    <x-card title="Filtro">
-                        <x-slot name="action">
-                            <button class="rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600">
-                                <x-icon name="dots-vertical" class="w-4 h-4 text-gray-500" />
-                            </button>
-                        </x-slot>
 
-                        <x-native-select icon='filter' id='select' name='select' label="Select Status">
-                            <option value='Sólido'>Sólido</option>
-                            <option value='Líquido'>Líquido</option>
-                            <option value='Semisólido'>Semisólido</option>
-                        </x-native-select>
-                    </x-card>
-                    <x-card title="Filtro">
-                        <x-slot name="action">
-                            <button class="rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600">
-                                <x-icon name="dots-vertical" class="w-4 h-4 text-gray-500" />
-                            </button>
-                        </x-slot>
+            <header class='flex items-center justify-start gap-3 dark:text-gray-300'>
 
-                        <x-native-select icon='filter' id='select' name='select'
-                            label="Filtre por data do anűncio">
-                            <option value='Sólido'>Uma Semana atrás</option>
-                            <option value='Líquido'>Um mes atrás</option>
+                <x-card title="Filtro">
+                    <x-slot name="action">
+                        <button class="rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+                            </svg>
 
-                        </x-native-select>
-                    </x-card>
+
+
+                        </button>
+                    </x-slot>
+
+                    <x-native-select wire:model="selectedType" wire:change="$refresh" icon='filter'  label="Selecione">
+                        <option value='None'>None</option>
+                        <option value='Sólido'>Sólido</option>
+                        <option value='Líquido'>Líquido</option>
+                        <option value='Semisólido'>Semisólido</option>
+                    </x-native-select>
+                </x-card>
+                <x-card title="Filtro">
+                    <x-slot name="action">
+                        <button class="rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+                            </svg>
+
+
+                        </button>
+                    </x-slot>
+
+                    <x-native-select icon='filter' id='select' name='select' label="Filtre por data do anűncio">
+                        <option value='Sólido'>Uma Semana atrás</option>
+                        <option value='Líquido'>Um mes atrás</option>
+
+                    </x-native-select>
+                </x-card>
 
             </header>
             <main class='my-12'>
@@ -127,6 +150,7 @@ new class extends Component {
                                         {{ Str::limit($note->description, 120) }}
 
                                 </div>
+                                {{$note->residue_type}}
                                 <div>
                                     <div class=pb-4>
                                         </p class='text-gray-900 dark:text-gray-300'> {{ $note->product_quantity }} /
@@ -159,6 +183,7 @@ new class extends Component {
                                 <x-button rounded sm class='w-full h-12' href="{{ route('notes.view-offer', $note) }}"
                                     icon='shopping-cart' primary spinner label='Quero comprar' />
                             </div>
+                            
 
                         </x-card>
                         @if ($showModal)

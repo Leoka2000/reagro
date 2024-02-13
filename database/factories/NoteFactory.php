@@ -32,7 +32,7 @@ class NoteFactory extends Factory
             'price' => $this->faker->numberBetween(0, 100),
             'price_perunit' => $this->faker->randomFloat(2, 1, 100),
             'description' => $this->faker->paragraph,
-            'residue_type' => $this->faker->word,
+            'residue_type' => $this->faker->randomElement(['Sólido', 'Líquido', 'Semisólido']),
             'image' => $this->faker->imageUrl(),
             'accept_terms' => $this->faker->boolean,
             'is_published' => $this->faker->boolean,
