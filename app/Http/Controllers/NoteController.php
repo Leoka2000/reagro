@@ -20,7 +20,7 @@ class NoteController extends Controller
 
     public function openImageModal()
     {
-  
+
         $this->showImageModal = true;
     }
 
@@ -39,12 +39,13 @@ class NoteController extends Controller
         // Your logic to fetch additional data or perform actions
         // related to the specific product identified by $note->id
 
-        $this->successDialog(); 
-      
+        $this->successDialog();
+
 
         $this->successDialog();
-        $this->openImageModal();
-    
+        //pass a openimagemodel function wquando o view se inicializa
+        // $this->openImageModal();
+
         return view('notes.view-offer', [
             'note' => $note,
             'showImageModal' => $this->showImageModal,
@@ -54,10 +55,10 @@ class NoteController extends Controller
         ]);
     }
 
-    
 
 
-    
+
+
     public function checkout(Note $note)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
@@ -177,7 +178,7 @@ class NoteController extends Controller
 
 
 
-                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productQuantity, $productName, $companyEmail, $companyState, $city,  $zipCode , $residueType, $companyName));
+                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productQuantity, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
                 }
 
 

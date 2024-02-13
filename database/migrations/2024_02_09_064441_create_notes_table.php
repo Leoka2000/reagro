@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('company_name')->nullable();
             $table->string('product_name');
-            $table->integer('product_quantity');
             $table->string('typeof_frete')->nullable();
             $table->string('address_city');
             $table->boolean('paid')->default(false);
@@ -27,7 +26,7 @@ return new class extends Migration
             $table->string('company_state')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('delivery_address');     // Delivery address eh na vdd a 'rua'
-            $table->decimal('price')->nullable();
+            $table->integer('price')->nullable();
             $table->decimal('price_perunit')->nullable();
             $table->text('description')->nullable();
             $table->string('residue_type')->nullable();

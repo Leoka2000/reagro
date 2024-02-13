@@ -13,7 +13,7 @@ new class extends Component {
 
     public $companyName;
     public $productName;
-    public $productQuantity;
+  
     public $typeofFrete; //N UTILIZAREMOS
     public $companyEmail;
     public $companyPhone;
@@ -35,15 +35,15 @@ new class extends Component {
             'companyName' => ['required', 'string', 'min:3'],
             'companyEmail' => ['required', 'email'],
             'productName' => ['required', 'string', 'min:3'],
-            'productQuantity' => ['required', 'numeric'],
+           
 
             'companyState' => ['required', 'string'],
             'addressCity' => ['required', 'string'],
             'companyPostalCode' => ['required', 'string'],
-
+            'companyPrice' => ['required', 'numeric'],
             'companyPhone' => ['required', 'numeric'],
             'deliveryAddress' => ['required', 'string', 'min:5'], //street,
-           'companyImage.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:102400',
+            'companyImage.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:102400',
             'pricePerUnit' => ['string', 'min:2'],
             'companyDescription' => ['required', 'string', 'min:30'],
             'residueType' => ['required', 'string', 'min:3'],
@@ -64,13 +64,13 @@ new class extends Component {
                 'company_name' => $this->companyName,
                 'product_name' => $this->productName,
                 'company_email' => $this->companyEmail,
-                'product_quantity' => $this->productQuantity,
+               
                 'company_state' => $this->companyState,
                 'address_city' => $this->addressCity,
                 'postal_code' => $this->companyPostalCode,
                 'company_phone' => $this->companyPhone,
                 'delivery_address' => $this->deliveryAddress,
-               'image' => implode(',', $images),
+                'image' => implode(',', $images),
                 'price_perunit' => $this->pricePerUnit,
                 'description' => $this->companyDescription,
                 'residue_type' => $this->residueType,
@@ -114,11 +114,12 @@ new class extends Component {
             {{--    :options="$this->countries()" --}}
 
             <x-native-select class='z-10' label="Selecione o tipo de unidade" placeholder="Select an option"
-                wire:model.defer="pricePerUnit" :options="['Litro', 'Mililitros', 'Grama', 'Kilo']" />
-            <x-input label="Selecione o preço por unidade (apenas números)" placeholder="200,00"
-                wire:model.defer="productQuantity" />
-            <x-input multiple type="file" wire:model="companyImage" label='Selecione fotos que deseja mostrar ao cliente. (Suas fotos não podem ser maiores que 1,5MB)'
-                placeholder="Upload de fotos"/>
+                wire:model.defer="pricePerUnit" :options="['litros', 'mililitros', 'gramas', 'kilos']" />
+            <x-input label="Selecione o valor total da sua oferta" placeholder="200.00"
+                wire:model.defer="companyPrice" />
+            <x-input multiple type="file" wire:model="companyImage"
+                label='Selecione fotos que deseja mostrar ao cliente. (Suas fotos não podem ser maiores que 1,5MB)'
+                placeholder="Upload de fotos" />
 
 
 
