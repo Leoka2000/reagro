@@ -40,10 +40,18 @@ class NoteController extends Controller
         // related to the specific product identified by $note->id
 
         $this->successDialog(); 
-        $this->openImageModal();
-        $this->closeImageModal();
+      
 
-        return view('notes.view-offer')->with('note', $note)->with('showImageModal', $this->showImageModal);
+        $this->successDialog();
+        $this->openImageModal();
+    
+        return view('notes.view-offer', [
+            'note' => $note,
+            'showImageModal' => $this->showImageModal,
+            'openImageModal' => function () {
+                $this->openImageModal();
+            },
+        ]);
     }
 
     

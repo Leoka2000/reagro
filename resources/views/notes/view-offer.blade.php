@@ -2,48 +2,51 @@
 
 use Livewire\Volt\Component;
 use Livewire\Attributes\Layout;
-  use App\Models\Order;
+use App\Models\Order;
 use App\Models\Note;
 use App\Models\User;
 use WireUi\Traits\Actions;
+use App\Http\Controllers\NoteController;
 
 new #[Layout('layouts.app')] class extends Component {
- 
+
+       
 
 }; ?>
 
 <div>
     <x-app-layout>
 
-    @if ($showImageModal)
-                          <x-modal wire:model.defer="simpleModal">
-    <x-card title="Consent Terms">
-        <p class="text-gray-600">
-            Lorem Ipsum...
-        </p>
- 
-        <x-slot name="footer">
-            <div class="flex justify-end gap-x-4">
-                <x-button flat label="Cancel" x-on:click="close" />
-                <x-button primary label="I Agree" />
-            </div>
-        </x-slot>
-    </x-card>
-</x-modal>
-                        @endif
+@if ($showImageModal)
+        <x-modal wire:model.defer="showImageModal">
+            <x-card title="Consent Terms">
+                <p class="text-gray-600">
+                    Lorem Ipsum...
+                </p>
+
+                <x-slot name="footer">
+                    <div class="flex justify-end gap-x-4">
+                        <x-button flat label="Cancel" x-on:click="close" />
+                        <x-button primary label="I Agree" />
+                    </div>
+                </x-slot>
+            </x-card>
+        </x-modal>
+    @endif
 
         <div class='px-3 py-12 sm:px-10 lg:pr-3 lg:pl-20 xl:pr-20 xl:pl-44'>
             <x-slot name="header">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    Produto -> nomeassakooas
+                    {{ $note->open_modal }}
+
                 </h2>
             </x-slot>
-        
 
-            
-            
+
+
+
             <header>
-                  <x-button primary sm spinner rounded label='Test Button' wire:click="openImageModal" />
+                <x-button primary sm spinner rounded label='Test Button' wire:click="openImageModal" />
             </header>
             <div>
                 <div>
@@ -51,7 +54,7 @@ new #[Layout('layouts.app')] class extends Component {
 
                         <div class='w-full md:w-3/4'>
                             <x-card class='w-full max-w-3xl my-2'>
-                               
+
                                 <div class=''>
                                     <div class='pb-4'>
                                         <p class='text-sm font-bold text-gray-950 dark:text-gray-200'>
@@ -72,20 +75,21 @@ new #[Layout('layouts.app')] class extends Component {
                                             <x-icon name="check" green xl class="w-4 h-4" /> Disponível
                                         </li>
                                     </ul>
-                                     <div class='flex items-center gap-3 my-5 '>
-                                                        @foreach (explode(',', $note->image) as $imageLink)
-                                                            <div class='relative flex flex-col items-center border-gray-300 rounded-md shadow-xl dark:border-gray-700'>
-                                                                <div class='absolute left-14 bottom-16'>
-                                                                    <x-button.circle md primary label="+" />
-                                                                </div>
+                                    <div class='flex items-center gap-3 my-5 '>
+                                        @foreach (explode(',', $note->image) as $imageLink)
+                                            <div
+                                                class='relative flex flex-col items-center border-gray-300 rounded-md shadow-xl dark:border-gray-700'>
+                                                <div class='absolute left-14 bottom-16'>
+                                                    <x-button.circle md primary label="+" />
+                                                </div>
 
-                                                                <img class='object-cover transition border border-gray-300 rounded-md shadow-xl dark:border-gray-700 dark sm:h-40 sm:w-40 bg-slate-300'
-                                                                    src="{{ asset('storage/' . $imageLink) }}"
-                                                                    alt="Image" title="Image" />
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                    
+                                                <img class='object-cover transition border border-gray-300 rounded-md shadow-xl dark:border-gray-700 dark sm:h-40 sm:w-40 bg-slate-300'
+                                                    src="{{ asset('storage/' . $imageLink) }}" alt="Image"
+                                                    title="Image" />
+                                            </div>
+                                        @endforeach
+                                    </div>
+
 
                                     <div class='flex flex-col'>
                                         <div>
@@ -95,7 +99,7 @@ new #[Layout('layouts.app')] class extends Component {
                                                         class='mb-2 text-sm text-gray-500 break-words dark:text-gray-400'>
                                                         {{ $note->description }}
                                                     </p>
-                                                   
+
                                                     <div>
 
                                                         <x-slot name="footer" class="flex w-full h-full">
