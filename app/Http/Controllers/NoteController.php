@@ -90,7 +90,7 @@ class NoteController extends Controller
         $order->total_price = $note->price;
         $order->session_id = $session->id;
         $order->company_email = $note->company_email;
-        $order->order_product_quantity = $note->product_quantity;
+        $order->note_to_paid = $note->paid;
         $order->order_company_state = $note->company_state;
         $order->order_product_name = $note->product_name;
         $order->order_address_city = $note->address_city;
@@ -98,14 +98,13 @@ class NoteController extends Controller
         $order->order_delivery_address = $note->delivery_address;
         $order->order_residue_type = $note->residue_type;
         $order->company_name = $note->company_name;
+        
 
         /*
      $order->company_email = $user->email;
         $order->company_name = $user->name;
      */
         $user = auth()->user();
-
-
 
         $user->orders()->save($order);
 
@@ -163,9 +162,10 @@ class NoteController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status === 'unpaid') {
                     $order->status = 'paid';
+                    $order->note_to_paid = 'paid';
                     $companyEmail = $order->company_email;
                     $productName = $order->order_product_name;
-                    $productQuantity = $order->order_product_quantity;
+      
                     $companyState = $order->order_company_state;
                     $city = $order->order_address_city;
                     $zipCode = $order->order_postal_code;
@@ -178,7 +178,7 @@ class NoteController extends Controller
 
 
 
-                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productQuantity, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
+                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
                 }
 
 

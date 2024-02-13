@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('typeof_frete')->nullable();
             $table->string('address_city');
-            $table->boolean('paid')->default(false);
+            $table->string('paid')->default('unpaid');
             $table->boolean('open_modal')->default(false);
             $table->string('company_email');
             $table->string('postal_code');
