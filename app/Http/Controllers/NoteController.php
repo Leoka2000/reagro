@@ -16,21 +16,39 @@ use Symfony\Component\Yaml\Yaml;
 
 class NoteController extends Controller
 {
+    public $showImageModal = false;
 
-    public function viewOffer(Note $note)
+    public function openImageModal()
     {
-        // Your logic to fetch additional data or perform actions
-        // related to the specific product identified by $note->id
+  
+        $this->showImageModal = true;
+    }
 
-        $this->successDialog(); // Call the successDialog function
-
-        return view('notes.view-offer', ['note' => $note]);
+    public function closeImageModal()
+    {
+        $this->showImageModal = false;
     }
 
     public function successDialog()
     {
         error_log('buceta');
     }
+
+    public function viewOffer(Note $note)
+    {
+        // Your logic to fetch additional data or perform actions
+        // related to the specific product identified by $note->id
+
+        $this->successDialog(); 
+        $this->openImageModal();
+        $this->closeImageModal();
+
+        return view('notes.view-offer')->with('note', $note)->with('showImageModal', $this->showImageModal);
+    }
+
+    
+
+
     
     public function checkout(Note $note)
     {
