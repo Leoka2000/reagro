@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('paid')->default('unpaid'); //n entendi o pq, mas quando compra vira uma string?
             $table->boolean('open_modal')->default(false);
             $table->string('company_email');
+            $table->string('product_quantity');
             $table->string('postal_code');
             $table->string('company_state')->nullable();
             $table->string('company_phone')->nullable();
