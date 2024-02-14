@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('order_postal_code')->nullable();;
             $table->string('order_delivery_address')->nullable();
             $table->string('order_residue_type')->nullable();
-       
             $table->string('company_name')->nullable();
             $table->integer('total_price')->nullable();
             $table->string('session_id');

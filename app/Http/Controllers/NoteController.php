@@ -91,7 +91,7 @@ class NoteController extends Controller
         $order->total_price = $note->price;
         $order->session_id = $session->id;
         $order->company_email = $note->company_email;
-        $order->note_to_paid = !$note->paid; //initially unpaid
+        $order->order_paid = $note->paid; //initially unpaid
         $order->order_company_state = $note->company_state;
         $order->order_product_name = $note->product_name;
         $order->order_address_city = $note->address_city;
@@ -178,7 +178,7 @@ class NoteController extends Controller
                     ->where('product_name', $order->order_product_name)
                     ->first();
 
-                if ($note) {
+                if ($note->paid === 'unpaid') {
                     $note->paid = 'paid';
                     $note->save();
                 }

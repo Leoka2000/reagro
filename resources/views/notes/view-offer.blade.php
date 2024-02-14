@@ -11,6 +11,7 @@ use App\Http\Controllers\NoteController;
 new #[Layout('layouts.app')] class extends Component {}; ?>
 
 <div>
+
     <x-app-layout>
 
         @if ($showImageModal)
@@ -29,8 +30,9 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                 </x-card>
             </x-modal>
         @endif
-
+ 
         <div class='flex px-3 py-12 sm:px-10 lg:pr-3 lg:pl-20 xl:pr-20 xl:pl-44'>
+            
             <x-slot name="header">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     {{ $note->product_name }}
@@ -39,6 +41,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
             </x-slot>
 
 <div>
+ <x-button icon="arrow-left" class="mb-8" href="{{ route('dashboard') }}"> Voltar</x-button>
             <div>
                 <div class='flex flex-col items-center justify-center w-full gap-4 xl:items-start xl:flex-row'>
 
@@ -59,6 +62,9 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                 </div>
                                 <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
                                     <li class='flex items-center w-full text-xs text-gray-500 dark:text-gray-400'>
+                                        <x-icon name="check" green xl class="w-4 h-4" /> {{ $note->address_city }}
+                                    </li>
+                                     <li class='flex items-center w-full text-xs text-gray-500 dark:text-gray-400'>
                                         <x-icon name="check" green xl class="w-4 h-4" /> Frete gratis
                                     </li>
                                     <li class='flex items-center text-xs text-gray-500 dark:text-gray-400'>

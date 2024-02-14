@@ -8,7 +8,7 @@ use WireUi\Traits\Actions;
 new class extends Component {
     use Actions;
     public $selectedType = 'None';
-     public $selectedState = 'None';
+    public $selectedState = 'None';
 
     public $showModal = false;
     public $noteToDelete;
@@ -50,17 +50,17 @@ new class extends Component {
         // Filter notes based on the selected area
         $query = Note::query();
 
-    // Filter notes based on the selected type
-    if ($this->selectedType != 'None') {
-        $query->where('residue_type', $this->selectedType);
-    }
+        // Filter notes based on the selected type
+        if ($this->selectedType != 'None') {
+            $query->where('residue_type', $this->selectedType);
+        }
 
-    // Filter notes based on the selected state
-    if ($this->selectedState != 'None') {
-        $query->where('company_state', $this->selectedState);
-    }
+        // Filter notes based on the selected state
+        if ($this->selectedState != 'None') {
+            $query->where('company_state', $this->selectedState);
+        }
 
-    return $query->get();
+        return $query->get();
     }
 
     public function placeholder()
@@ -89,7 +89,7 @@ new class extends Component {
         <div>
 
 
-            <header class='flex items-center justify-start gap-3 dark:text-gray-300'>
+            <header class='flex flex-col items-center justify-start gap-3 sm:flex-row dark:text-gray-300'>
 
                 <x-card title="Tipo do produto">
                     <x-slot name="action">
@@ -120,7 +120,7 @@ new class extends Component {
                         </button>
                     </x-slot>
 
-                    <x-native-select  wire:model="selectedState" wire:change="$refresh" icon='filter' label="Cidade">
+                    <x-native-select wire:model="selectedState" wire:change="$refresh" icon='filter' label="Cidade">
                         <option value='Rio Grande do Sul'>Rio Grande do Sul</option>
                         <option value='Santa Catarina'>Santa Catarina</option>
                         <option value='Paraná'>Paraná</option>
@@ -131,7 +131,7 @@ new class extends Component {
             <main class='my-12'>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach ($notes as $note)
-                        <x-card class='my-2 ' wire:key='{{ $note->id }}'>
+                        <x-card class='relative p-3 ' wire:key='{{ $note->id }}'>
                             <header>
                                 <div class="flex justify-center">
 
@@ -144,8 +144,8 @@ new class extends Component {
                                             $firstImage = reset($imageArray);
                                         @endphp
 
-                                        <img class='object-cover w-full h-full rounded-md bg-slate-300'
-                                            src="{{ asset('storage/' . $firstImage) }}" alt="Image" title="sheesh" />
+                                        <img class='object-cover w-full rounded-md :h-full bg-slate-300'
+                                            src="{{ asset($firstImage) }}" alt="Image" title="sheesh" />
                                     </div>
 
 
@@ -153,36 +153,51 @@ new class extends Component {
                             </header>
                             <div class='mt-5'>
                                 <div class='pb-4'>
-                                    <p class='text-sm font-bold break-words text-gray-950 dark:text-gray-200'>
+                                    <p class='text-sm font-bold text-gray-700 break-words dark:text-gray-200'>
                                         {{ Str::limit($note->description, 120) }}
 
-                                </div>
-                                {{ $note->residue_type }}
-                                    {{ $note->company_state }}
-                                          {{ $note->paid }}
-                                <div>
+                                    </p>
+
+                                    {{ $note->product_name }}
+
+                                    <p>
                                     <div class='pt-2 pb-4'>
-                                    <x-badge class='h-7' rounded  positive outline label="R${{ $note->price }} /  {{ $note->price_perunit }}" />
-                                        
+                                        <x-badge class='h-7' rounded positive outline
+                                            label="R${{ $note->price }} /  {{ $note->price_perunit }}" />
+
                                     </div>
                                 </div>
                                 <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
                                     <li class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
                                         <x-icon name="check" green xl class="w-4 h-4" /> Frete grátis
                                     </li>
-                                    @if ($note->price)
+                                    <li class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                        <x-icon name="globe" green xl class="w-4 h-4" /> {{ $note->address_city }}
+                                    </li>
+                                    <li class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                        <x-icon name="user" green xl class="w-4 h-4" /> Publicado por:
+                                        {{ $note->company_name }}
+                                    </li>
+                                    <li class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                        <x-icon name="beaker" green xl class="w-4 h-4" /> Tipo:
+                                        {{ $note->residue_type }}
+                                    </li> 
+                                    @if ( $note->paid === 'paid' )
                                     <li class='flex items-center gap-2 text-xs text-red-500 dark:text-red-400'>
-                                        <x-icon name="exclamation-circle" green xl class="w-4 h-4" /> Esgotado
+                                        <x-icon name="exclamation-circle" green negative xl class="w-4 h-4" />  Indisponível
                                     </li>
-                                    @else
+                                    @else ( $note->paid === 'unpaid')
                                     <li class='flex items-center gap-2 text-xs text-green-500 dark:text-green-400'>
-                                        <x-icon name="exclamation-circle"  negative xl class="w-4 h-4" /> Esgotado
+                                        <x-icon name="exclamation-circle" green xl class="w-4 h-4" /> Disponível
                                     </li>
-                                    
-                                   
                                     @endif
+
+
+
+
                                 </ul>
                             </div>
+
                             <div class='flex items-center justify-end gap-2'>
                                 @can('update', $note)
                                     <!-- Update button -->
@@ -196,9 +211,12 @@ new class extends Component {
                                         wire:click="openModal('{{ $note->id }}')"></x-button.circle>
                                 @endcan
                             </div>
-                            <div class='w-full mt-5'>
+                            <div class='w-full my-5'>
                                 <x-button rounded sm class='w-full h-12' href="{{ route('notes.view-offer', $note) }}"
                                     icon='shopping-cart' primary spinner label='Quero comprar' />
+                            </div>
+                            <div class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                <x-icon name="calendar" green xl class="w-4 h-4" /> {{ $note->created_at }}
                             </div>
 
 
