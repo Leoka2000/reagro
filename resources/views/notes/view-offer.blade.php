@@ -31,7 +31,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
             </x-modal>
         @endif
 
-        <div class='flex justify-center mx-3 my-8'>
+        <div class='flex justify-center pb-4 mx-3 my-8'>
 
             <x-slot name="header">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
@@ -62,7 +62,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             <div class='font-thin text-gray-500 dark:text-gray-400'>
                                                 Postado em:
                                                 <strong class='text-gray-800 dark:text-gray-300'>
-                                                    {{ $note->created_at }}<strong>
+                                                    {{ $note->created_at->format('d-m-Y') }}<strong>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             <div
                                                 class='relative flex flex-col items-center border-gray-300 rounded-md dark:border-gray-700'>
                                                 <div class='absolute left-14 bottom-16'>
-                                                    <!-- <x-button.circle sm primary label="+" /> -->
+
                                                 </div>
                                                 <img class='object-cover w-full h-48 transition border border-gray-200 rounded-md sm:p-2 md:p-0 dark:border-gray-700 md:w-72 md:h-44'
                                                     src="{{ asset('storage/' . $imageLink) }}" alt="Image"
@@ -80,7 +80,51 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             </div>
                                         @endforeach
                                     </div>
+                                    <footer class='flex flex-col gap-5 mt-10'>
+                                        <div class='flex border border-gray-100 rounded-md dark:border-gray-700'>
+                                            <x-card title="Comentários adicionais">
+                                                <x-slot name="action">
 
+
+                                                    <x-icon name="plus" md class="w-6 h-6 font-thin text-gray-500" />
+
+                                                </x-slot>
+                                                <ul class='break-words'>
+                                                    <li class='text-sm font-thin'>
+                                                        {{ $note->description }}
+                                                    </li>
+                                                </ul>
+                                            </x-card>
+                                        </div>
+                                        <div class='flex border border-gray-100 rounded-md dark:border-gray-700'>
+                                            <x-card title="Documentos necessários">
+                                                <x-slot name="action">
+                                                    <x-icon name="information-circle" md
+                                                        class="w-6 h-6 font-thin text-orange-500" />
+                                                </x-slot>
+                                                <div>
+                                                    <p class='mb-1 text-sm font-semibold dark:text-gray-200 '>
+                                                        Documentos para a compra:</p>
+                                                    <ul class='break-words'>
+                                                        <li class='flex items-center justify-start w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                                            <x-icon name="check" green class="w-6 h-6" />
+                                                            <p>Comprovante
+                                                                de Endereço Atualizado - de no máximo 3 meses (endereço
+                                                                do
+                                                                comprovante deve ser o mesmo endereço do cadastro).
+                                                                Exemplos: água, luz, telefone, internet, fatura do
+                                                                cartão de
+                                                                crédito.;
+                                                        </li>
+                                                        <p>
+                                                    </ul>
+                                                </div>
+
+
+                                            </x-card>
+                                        </div>
+
+                                    </footer>
 
                                     <div class='flex flex-col'>
                                         <div>
@@ -101,12 +145,11 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                      --}}{{-- 
                     PAYMENT
                      --}}
-                    <main class='flex justify-center w-full h-full md:w-3/4'>
-                        <x-card class='h-full gap-6 dark:border-gray-700 dark:bg-gray-800'>
+                    <main class='flex justify-center w-full h-full'>
+                        <x-card class='w-auto h-full gap-3 dark:border-gray-700 dark:bg-gray-800'>
                             <div>
                                 <div class='mb-6'>
-                                    <p class='mb-2 text-2xl font-bold text-gray-900 dark:text-gray-200'>Comprar um
-                                        produto</p>
+                                    <p class='text-gray-900 font-2xl text-md dark:text-gray-400'>Comprar:</p>
                                     <p class='text-lg text-gray-800 dark:text-gray-200'>{{ $note->product_name }}</p>
                                 </div>
                                 <div class='flex items-center justify-start gap-2 '>
@@ -227,9 +270,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
 
                     </main>
                 </div>
-                <div class='mt-5'>
 
-                </div>
 
             </div>
         </div>
