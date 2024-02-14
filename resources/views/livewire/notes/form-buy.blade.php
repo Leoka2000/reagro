@@ -161,18 +161,26 @@ new class extends Component {
                                     {{ $note->company_state }}
                                           {{ $note->paid }}
                                 <div>
-                                    <div class=pb-4>
-                                        </p class='text-gray-900 dark:text-gray-300'> {{ $note->product_quantity }} /
-                                        {{ $note->price_perunit }} </p>
+                                    <div class='pt-2 pb-4'>
+                                    <x-badge class='h-7' rounded  positive outline label="R${{ $note->price }} /  {{ $note->price_perunit }}" />
+                                        
                                     </div>
                                 </div>
                                 <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
-                                    <li class='flex items-center w-full text-xs text-gray-500 dark:text-gray-400'>
-                                        <x-icon name="check" green xl class="w-4 h-4" /> Frete gratis
+                                    <li class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                        <x-icon name="check" green xl class="w-4 h-4" /> Frete grátis
                                     </li>
-                                    <li class='flex items-center text-xs text-gray-500 dark:text-gray-400'>
-                                        <x-icon name="check" green xl class="w-4 h-4" /> Disponível
+                                    @if ($note->price)
+                                    <li class='flex items-center gap-2 text-xs text-red-500 dark:text-red-400'>
+                                        <x-icon name="exclamation-circle" green xl class="w-4 h-4" /> Esgotado
                                     </li>
+                                    @else
+                                    <li class='flex items-center gap-2 text-xs text-green-500 dark:text-green-400'>
+                                        <x-icon name="exclamation-circle"  negative xl class="w-4 h-4" /> Esgotado
+                                    </li>
+                                    
+                                   
+                                    @endif
                                 </ul>
                             </div>
                             <div class='flex items-center justify-end gap-2'>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('company_email')->nullable();
             $table->string('order_product_name')->nullable();
-            $table->string('note_to_paid')->nullable();
+            $table->string('order_paid')->default('unpaid');
             $table->string('order_company_state')->nullable();
             $table->string('order_address_city')->nullable();
             $table->string('order_postal_code')->nullable();;

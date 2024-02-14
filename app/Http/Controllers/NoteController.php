@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Yaml\Yaml;
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -90,7 +91,7 @@ class NoteController extends Controller
         $order->total_price = $note->price;
         $order->session_id = $session->id;
         $order->company_email = $note->company_email;
-        $order->note_to_paid = $note->paid;
+        $order->note_to_paid = !$note->paid; //initially unpaid
         $order->order_company_state = $note->company_state;
         $order->order_product_name = $note->product_name;
         $order->order_address_city = $note->address_city;
@@ -98,7 +99,7 @@ class NoteController extends Controller
         $order->order_delivery_address = $note->delivery_address;
         $order->order_residue_type = $note->residue_type;
         $order->company_name = $note->company_name;
-        
+
 
         /*
      $order->company_email = $user->email;
@@ -107,6 +108,7 @@ class NoteController extends Controller
         $user = auth()->user();
 
         $user->orders()->save($order);
+
 
 
         return redirect($session->url);
@@ -131,7 +133,7 @@ class NoteController extends Controller
     }
 
 
-    public function webhook(Note $note)
+    public function webhook()
     {
         // This is your Stripe CLI webhook secret for testing your endpoint locally.
         $endpoint_secret = env('STRIPE_WEBHOOK_SECRET');
@@ -162,33 +164,31 @@ class NoteController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status === 'unpaid') {
                     $order->status = 'paid';
-                    $order->note_to_paid = 'paid';
                     $companyEmail = $order->company_email;
                     $productName = $order->order_product_name;
-      
                     $companyState = $order->order_company_state;
                     $city = $order->order_address_city;
                     $zipCode = $order->order_postal_code;
                     $street = $order->order_delivery_address;
                     $residueType = $order->order_residue_type;
                     $companyName = $order->company_name;
-
-
                     $order->save();
 
+                    $note = Note::where('company_email', $order->company_email)
+                    ->where('product_name', $order->order_product_name)
+                    ->first();
 
+                if ($note) {
+                    $note->paid = 'paid';
+                    $note->save();
+                }
 
                     Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
                 }
 
+               
 
 
-                $user = $order->user;
-
-                if ($user) {
-                    $user->coins += 2;
-                    $user->save();
-                }
                 // ... handle other event types
             default:
                 echo 'Received unknown event type ' . $event->type;
