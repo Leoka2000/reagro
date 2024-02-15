@@ -14,14 +14,14 @@ new class extends Component {
     public $companyName;
     public $productName;
 
-    public $typeofFrete; //N UTILIZAREMOS
+    public $typeofFrete; //N UTILIZAREMOS, será null
     public $companyEmail;
     public $companyPhone;
     public $companyState;
     public $deliveryAddress;
     public $companyPostalCode;
     public $productQuantity;
-    public $companyPrice; //N USAREMOS POR ENQUANTO TBM
+    public $companyPrice;
     public $residueType;
     public $pricePerUnit;
     public $addressCity;
