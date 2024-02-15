@@ -31,7 +31,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
             </x-modal>
         @endif
 
-        <div class='flex justify-center pb-4 mx-3 my-8'>
+        <div class='flex justify-center pb-4 my-8'>
 
             <x-slot name="header">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
@@ -55,12 +55,12 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                         <p>
                                     </div>
                                     <div>
-                                        <div class='flex justify-end w-full gap-1 mb-2 text-sm '>
+                                        <div class='flex justify-start w-full gap-1 mb-10 text-sm '>
 
                                             <span> <x-icon name="calendar" solid outline
                                                     class='w-5 h-5 text-gray-600 dark:text-gray-300' /> </span>
                                             <div class='font-thin text-gray-500 dark:text-gray-400'>
-                                                Postado em:
+                                                Publicado em:
                                                 <strong class='text-gray-800 dark:text-gray-300'>
                                                     {{ $note->created_at->format('d-m-Y') }}<strong>
                                             </div>
@@ -182,127 +182,131 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                     PAYMENT
                      --}}
                     <main class='flex justify-center w-full h-full'>
-                        <x-card class='w-auto h-full gap-3 rounded-lg dark:border-gray-700'>
-                           <div class='px-2'>
-                            <div>
-                                <div class='mb-6'>
-                                    <p class='text-gray-600 font-2xl text-md dark:text-gray-400'>Comprar:</p>
-                                    <p class='text-lg text-gray-800 dark:text-gray-200'>{{ $note->product_name }}</p>
-                                </div>
-                                <div class='flex items-center justify-start gap-2 '>
-                                    <p class='text-lg text-gray-500 dark:text-gray-400'>Tipo:</p>
-                                    <p class='text-lg font-semibold text-gray-800 dark:text-gray-200'>
-                                        {{ $note->residue_type }}
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div class='flex flex-col xl:w-96'>
+                        <x-card class='gap-3 rounded-lg w-3xl dark:border-gray-700'>
+                            <div class=''>
                                 <div>
-                                    <header class='mt-10 mb-5'>
-                                        <p class='text-base font-bold text-gray-900 dark:text-gray-200'>Especificações
-                                            do
-                                            produto
+                                    <div class='mb-6'>
+                                        <p class='text-gray-600 font-2xl text-md dark:text-gray-400'>Comprar:</p>
+                                        <p class='text-lg text-gray-800 dark:text-gray-200'>{{ $note->product_name }}
                                         </p>
-                                    </header>
-                                </div>
-                                <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
-                                    <span> <x-icon name="user" class="w-5 h-5" solid
-                                            class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300 ' />
-                                    </span>
-                                    <div class='font-thin text-left text-gray-500 dark:text-gray-400'>
-                                        Publicado por:
-                                        <strong
-                                            class='text-gray-800 dark:text-gray-300'>{{ $note->company_name }}<strong>
                                     </div>
-                                </div>
-
-                                <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
-                                    <span> <x-icon name="beaker" class="w-5 h-5" solid
-                                            class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300 ' />
-                                    </span>
-                                    <div class='font-thin text-left text-gray-500 dark:text-gray-400'>
-                                        Nome:
-                                        <strong
-                                            class='text-gray-800 dark:text-gray-300'>{{ $note->product_name }}<strong>
+                                    <div class='flex items-center justify-start gap-2 '>
+                                        <p class='text-lg text-gray-500 dark:text-gray-400'>Tipo:</p>
+                                        <p class='text-lg font-semibold text-gray-800 dark:text-gray-200'>
+                                            {{ $note->residue_type }}
+                                        </p>
                                     </div>
+
                                 </div>
-                                <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
-                                    <span><x-icon name="calculator"
-                                            class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300' />
-
-                                    </span>
-                                    <div class='font-thin text-gray-500 dark:text-gray-400'>
-                                        Quantidade:
-                                        <strong class='text-gray-800 dark:text-gray-300'>{{ $note->product_quantity }}
-
-                                            <strong>
+                                <div class='flex flex-col xl:w-96'>
+                                    <div>
+                                        <header class='mt-10 mb-5'>
+                                            <p class='text-base font-bold text-gray-900 dark:text-gray-200'>
+                                                Especificações
+                                                do
+                                                produto
+                                            </p>
+                                        </header>
                                     </div>
-                                </div>
-                                <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
-                                    <span><x-icon name="cog"
-                                            class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300' />
-
-
-                                    </span>
-                                    <div class='font-thin text-gray-500 dark:text-gray-400'>
-                                        Unidade:
-                                        <strong class='text-gray-800 dark:text-gray-300'> {{ $note->price_perunit }}
-
-                                            <strong>
+                                    <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
+                                        <span> <x-icon name="user" class="w-5 h-5" solid
+                                                class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300 ' />
+                                        </span>
+                                        <div class='font-thin text-left text-gray-500 dark:text-gray-400'>
+                                            Publicado por:
+                                            <strong
+                                                class='text-gray-800 dark:text-gray-300'>{{ $note->company_name }}<strong>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
-                                    <span><x-icon name="currency-dollar"
-                                            class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300' />
-                                    </span>
-                                    <div class='font-thin text-gray-500 dark:text-gray-400'>
-                                        Preço total:
-                                        <strong class='text-green-600 dark:text-green-400'> R$ {{ $note->price }}
-                                            <strong>
+                                    <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
+                                        <span> <x-icon name="beaker" class="w-5 h-5" solid
+                                                class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300 ' />
+                                        </span>
+                                        <div class='font-thin text-left text-gray-500 dark:text-gray-400'>
+                                            Nome:
+                                            <strong
+                                                class='text-gray-800 dark:text-gray-300'>{{ $note->product_name }}<strong>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class='w-full'>
-                                    <div class='justify-start w-full gap-4 mb-1 text-sm'>
-                                        <x-badge icon="globe" class='w-auto mb-1 h-7 ' outline rounded md positive
-                                            label=" {{ $note->company_state }}" />
+                                    <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
+                                        <span><x-icon name="calculator"
+                                                class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300' />
+
+                                        </span>
+                                        <div class='font-thin text-gray-500 dark:text-gray-400'>
+                                            Quantidade:
+                                            <strong
+                                                class='text-gray-800 dark:text-gray-300'>{{ $note->product_quantity }}
+
+                                                <strong>
+                                        </div>
+                                    </div>
+                                    <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
+                                        <span><x-icon name="cog"
+                                                class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300' />
+
+
+                                        </span>
+                                        <div class='font-thin text-gray-500 dark:text-gray-400'>
+                                            Unidade:
+                                            <strong class='text-gray-800 dark:text-gray-300'>
+                                                {{ $note->price_perunit }}
+
+                                                <strong>
+                                        </div>
+                                    </div>
+
+                                    <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
+                                        <span><x-icon name="currency-dollar"
+                                                class='w-6 h-6 text-gray-800 rounded-full dark:text-gray-300' />
+                                        </span>
+                                        <div class='font-thin text-gray-500 dark:text-gray-400'>
+                                            Preço total:
+                                            <strong class='text-green-600 dark:text-green-400'> R$ {{ $note->price }}
+                                                <strong>
+                                        </div>
+                                    </div>
+                                    <div class='w-full'>
+                                        <div class='justify-start w-full gap-4 mb-1 text-sm'>
+                                            <x-badge icon="globe" class='w-auto mb-1 h-7 ' outline rounded md
+                                                positive label=" {{ $note->company_state }}" />
+                                            <x-badge icon="globe" class='w-auto h-7 ' outline rounded md positive
+                                                label=" {{ $note->address_city }}" />
+                                        </div>
                                         <x-badge icon="globe" class='w-auto h-7 ' outline rounded md positive
-                                            label=" {{ $note->address_city }}" />
+                                            label=" CEP: {{ $note->postal_code }}" />
+                                        <x-badge icon="exclamation-circle" class='w-auto h-7 ' outline rounded md
+                                            positive label="Frete: (null)" />
                                     </div>
-                                    <x-badge icon="globe" class='w-auto h-7 ' outline rounded md positive
-                                        label=" CEP: {{ $note->postal_code }}" />
-                                    <x-badge icon="exclamation-circle" class='w-auto h-7 ' outline rounded md positive
-                                        label="Frete: (null)" />
+
+                                    <div
+                                        class='flex items-center justify-start pt-5 pb-2 text-xs text-gray-500 font-extralight dark:text-gray-400'>
+                                        <a class='flex flex-col items-center mx-3'
+                                            href="{{ 'mailto:' . $note->company_email }}">
+                                            <x-button.circle md icon="inbox"></x-button.circle>
+                                            <p class='mt-1'>Email do vendedor</p>
+
+                                        </a>
+
+                                        <a class='flex flex-col items-center'>
+                                            <x-button.circle md icon="phone"></x-button.circle>
+                                            <p class='mt-1'> {{ $note->company_phone }}</p>
+                                        </a class='w-full'>
+                                    </div>
                                 </div>
 
-                                <div
-                                    class='flex items-center justify-start pt-5 pb-2 text-xs text-gray-500 font-extralight dark:text-gray-400'>
-                                    <a class='flex flex-col items-center mx-3'
-                                        href="{{ 'mailto:' . $note->company_email }}">
-                                        <x-button.circle md icon="inbox"></x-button.circle>
-                                        <p class='mt-1'>Email do vendedor</p>
 
-                                    </a>
+                                <x-slot name="footer" class="flex w-full h-full">
+                                    <form action="{{ route('checkout', ['note' => $note->id]) }}" method="POST"
+                                        class='flex flex-col items-center justify-center w-full gap-3'>
+                                        @csrf
 
-                                    <a class='flex flex-col items-center'>
-                                        <x-button.circle md icon="phone"></x-button.circle>
-                                        <p class='mt-1'> {{ $note->company_phone }}</p>
-                                    </a class='w-full'>
-                                </div>
-                            </div>
+                                        <x-button sm primary type='submit' rounded spinner icon='shopping-cart'
+                                            class='w-full h-12 mt-4' label='Comprar' />
+                                    </form>
 
-
-                            <x-slot name="footer" class="flex w-full h-full">
-                                <form action="{{ route('checkout', ['note' => $note->id]) }}" method="POST"
-                                    class='flex flex-col items-center justify-center w-full gap-3'>
-                                    @csrf
-
-                                    <x-button sm primary type='submit' rounded spinner icon='shopping-cart'
-                                        class='w-full h-12 mt-4' label='Comprar' />
-                                </form>
-
-                            </x-slot>
+                                </x-slot>
                             </div>
                         </x-card>
 

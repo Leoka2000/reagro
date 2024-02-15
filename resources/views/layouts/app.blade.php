@@ -55,9 +55,9 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="relative">
             <div class='mt-2'>
-                <div class='flex flex-col items-start gap-3'>
+                <div class='flex items-center justify-between px-3 sm:px-10 md:px-20'>
                     <div x-data="window.themeSwitcher()" x-init="switchTheme()" @keydown.window.tab="switchOn = false"
                         class="flex items-center justify-center space-x-1">
                         <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">
@@ -73,32 +73,36 @@
                             class="text-sm select-none">
 
                         </label>
-                        <x-icon name="moon" class="w-5 h-5 text-gray-400"  />
+                        <x-icon name="moon" class="w-5 h-5 text-gray-400" />
                     </div>
-                    
+                    <div class='flex'>
+                        <livewire:email-company.send-contact />
+                    </div>
+                </div>
+
+            </div>
+
+            {{ $slot }}
+
+        </main>
+        <div class="flex justify-center gap-1 p-10 sm:items-center sm:justify-between">
+            <div class="text-sm text-center text-gray-400 dark:text-gray-500 sm:text-start">
+                <div class="flex items-center gap-4">
+                    <a href="https://www.linkedin.com/in/leoreus/" target='_blank'
+                        class="inline-flex items-center group hover:text-green-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-green-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            class="w-5 h-5 -mt-px me-1 stroke-gray-400 dark:stroke-gray-500 group-hover:stroke-gray-500 dark:group-hover:stroke-gray-400">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                        ReAgro Marketplace - Desenvolvido por Leo Reus
+                    </a>
                 </div>
             </div>
-            {{ $slot }}
-            <div class="flex justify-center gap-1 p-10 sm:items-center sm:justify-between">
-                        <div class="text-sm text-center text-gray-400 dark:text-gray-500 sm:text-start">
-                            <div class="flex items-center gap-4">
-                                <a href="https://www.linkedin.com/in/leoreus/" target='_blank'
-                                    class="inline-flex items-center group hover:text-green-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-green-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        class="w-5 h-5 -mt-px me-1 stroke-gray-400 dark:stroke-gray-500 group-hover:stroke-gray-500 dark:group-hover:stroke-gray-400">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                    </svg>
-                         ReAgro Marketplace   -    Desenvolvido por Leo Reus    
-                                </a>
-                            </div>
-                        </div>
 
-                        
-                    </div>
-        </main>
-        
+
+        </div>
+
     </div>
 </body>
 

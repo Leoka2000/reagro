@@ -176,7 +176,7 @@ new class extends Component {
 
                                     <div class='pt-2 pb-4'>
                                         <x-badge class='h-7' rounded positive outline
-                                            label="R${{ $note->price }} /  {{ $note->price_perunit }}" />
+                                            label="R$ {{ $note->price }}" />
 
                                     </div>
                                 </div>

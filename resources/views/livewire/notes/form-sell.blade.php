@@ -87,71 +87,73 @@ new class extends Component {
     }
 }; ?>
 {{-- 'residue_type' => $this->residueType, --}}
+<div>
+    <x-card title="Descreva abaixo os detalhes do produto que pretendes vender.">
+        <x-errors class="mb-4" />
 
-<x-card title="Descreva abaixo os detalhes do produto que pretende vender.">
-    <x-errors class="mb-4" />
+        <div class="grid grid-cols-1 gap-6 px-2 sm:grid-cols-2">
+            <x-input icon='user' label="Nome da Empresa" placeholder="Transer Wise LTda"
+                wire:model.defer="companyName" />
+            <x-input icon='mail' label="Email para contato" placeholder="example@gmail.com"
+                wire:model.defer="companyEmail" />
 
-    <div class="grid grid-cols-1 gap-6 px-2 sm:grid-cols-2">
-        <x-input icon='user' label="Nome da Empresa" placeholder="Transer Wise LTda" wire:model.defer="companyName" />
-        <x-input icon='mail' label="Email para contato" placeholder="example@gmail.com"
-            wire:model.defer="companyEmail" />
+            <div class="col-span-1 sm:col-span-2 sm:grid sm:grid-cols-7 sm:gap-5">
+                <div class="col-span-1 mb-4 sm:col-span-4">
+                    <x-input icon='beaker' label="Nome do produto sendo vendido" placeholder="Cloridrato hidratado"
+                        wire:model.defer="productName" />
+                </div>
 
-        <div class="col-span-1 sm:col-span-2 sm:grid sm:grid-cols-7 sm:gap-5">
-            <div class="col-span-1 mb-4 sm:col-span-4">
-                <x-input icon='beaker' label="Nome do produto sendo vendido" placeholder="Cloridrato hidratado"
-                    wire:model.defer="productName" />
+                <div class="col-span-1 sm:col-span-3">
+                    <x-input icon='phone' label="Whatsapp para contato" placeholder="+55 51 99875531"
+                        wire:model.defer="companyPhone" />
+
+                </div>
             </div>
 
-            <div class="col-span-1 sm:col-span-3">
-                <x-input icon='phone' label="Whatsapp para contato" placeholder="+55 51 99875531"
-                    wire:model.defer="companyPhone" />
+            <x-native-select label="Tipo de produto" placeholder="Sólido" :options="['Sólido', 'Líquido', 'Semi-sólido']" wire:model="residueType" />
+
+            {{--    :options="$this->countries()" --}}
+
+            <x-native-select class='z-10' label="Tipo de unidade" placeholder="Select an option"
+                wire:model.defer="pricePerUnit" :options="['Litros', 'Mililitros', 'Gramas', 'Kilos']" />
+            <x-input icon='currency-dollar' label="Valor total da sua oferta (apenas números!)" placeholder="200.00"
+                wire:model.defer="companyPrice" />
+            <x-input multiple type="file" wire:model="companyImage"
+                label='Fotos que deseja mostrar ao cliente. (suas fotos não podem ser maiores que 1,5MB)'
+                placeholder="Upload de fotos" />
+
+
+
+
+            <x-input label="Rua" placeholder=" Rua Montserrat 12" wire:model.defer="deliveryAddress" /> <x-input
+                label="Quantidade total do produto" placeholder="2 kilos de .... " wire:model.defer="productQuantity" />
+            <div class="col-span-1 sm:col-span-2">
+
+                <div class="col-span-1 sm:col-span-2 sm:grid sm:grid-cols-3 sm:gap-6">
+                    <x-input label="Cidade" class='mb-4' placeholder="Porto Alegre" wire:model.defer="addressCity" />
+                    <x-input label="Estado" class='mb-4' placeholder="Rio Grande do Sul"
+                        wire:model.defer="companyState" />
+                    <x-input label="Código postal para entrega (CEP)" placeholder="90215-043"
+                        wire:model.defer="companyPostalCode" />
+                </div>
+                <div class="flex flex-col gap-6 my-6">
+                    <x-textarea label="Descrição do anúncio" wire:model.defer="companyDescription" />
+                    <x-toggle label="Eu li e aceito os termos de serviço" class='bb-20'
+                        wire:model.defer="acceptTerms" />
+                </div>
+
+
+
 
             </div>
-        </div>
 
-        <x-native-select label="Tipo de produto" placeholder="Sólido" :options="['Sólido', 'Líquido', 'Semi-sólido']" wire:model="residueType" />
+            <x-slot name="footer" class='mt-24'>
+                <div class="flex tp-5 gap-x-3">
 
-        {{--    :options="$this->countries()" --}}
-
-        <x-native-select class='z-10' label="Tipo de unidade" placeholder="Select an option"
-            wire:model.defer="pricePerUnit" :options="['Litros', 'Mililitros', 'Gramas', 'Kilos']" />
-        <x-input icon='currency-dollar' label="Valor total da sua oferta (apenas números!)" placeholder="200.00"
-            wire:model.defer="companyPrice" />
-        <x-input multiple type="file" wire:model="companyImage"
-            label='Fotos que deseja mostrar ao cliente. (suas fotos não podem ser maiores que 1,5MB)'
-            placeholder="Upload de fotos" />
-
-
-
-
-        <x-input label="Rua" placeholder=" Rua Montserrat 12" wire:model.defer="deliveryAddress" /> <x-input
-            label="Quantidade total do produto" placeholder="2 kilos de .... " wire:model.defer="productQuantity" />
-        <div class="col-span-1 sm:col-span-2">
-
-            <div class="col-span-1 sm:col-span-2 sm:grid sm:grid-cols-3 sm:gap-6">
-                <x-input label="Cidade" class='mb-4' placeholder="Porto Alegre" wire:model.defer="addressCity" />
-                <x-input label="Estado" class='mb-4' placeholder="Rio Grande do Sul"
-                    wire:model.defer="companyState" />
-                <x-input label="Código postal para entrega (CEP)" placeholder="90215-043"
-                    wire:model.defer="companyPostalCode" />
-            </div>
-            <div class="flex flex-col gap-6 my-6">
-                <x-textarea label="Detalhes do anúncio" wire:model.defer="companyDescription" />
-                <x-toggle label="Eu li e aceito os termos de serviço" class='bb-20' wire:model.defer="acceptTerms" />
-            </div>
-
-
-
-
-        </div>
-
-        <x-slot name="footer" class='mt-24'>
-            <div class="flex items-center justify-end tp-5 gap-x-3">
-
-                <x-button wire:click="submit" label="Save" spinner="save" primary />
-            </div>
-        </x-slot>
-</x-card>
+                    <x-button wire:click="submit" label="Criar" icon='plus' spinner="save" primary />
+                </div>
+            </x-slot>
+    </x-card>
 </div>
 
 {{--     'price' => $this->companyPrice, 'typeof_frete' => $this->typeofFrete,   'companyPrice' => ['required', 'integer'], --}}
