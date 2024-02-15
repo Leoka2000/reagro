@@ -88,11 +88,11 @@ class NoteController extends Controller
 
         $order = new Order();
         $order->status = 'unpaid';
-        $order->total_price = $note->price;
         $order->session_id = $session->id;
         $order->company_email = $note->company_email;
         $order->order_paid = $note->paid; //initially unpaid
         $order->order_company_state = $note->company_state;
+        $order->order_product_quantity = $note->product_quantity;
         $order->order_product_name = $note->product_name;
         $order->order_address_city = $note->address_city;
         $order->order_postal_code = $note->postal_code;
@@ -100,7 +100,7 @@ class NoteController extends Controller
         $order->order_residue_type = $note->residue_type;
         $order->company_name = $note->company_name;
 
-
+        Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $order->order_delivery_address, $order->order_product_name, $order->company_email, $order->order_company_state,  $order->order_address_city, $order->order_postal_code, $order->order_residue_type, $order->company_name, $order->order_product_quantity));
         /*
      $order->company_email = $user->email;
         $order->company_name = $user->name;
@@ -164,6 +164,8 @@ class NoteController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status === 'unpaid') {
                     $order->status = 'paid';
+
+                    /*
                     $companyEmail = $order->company_email;
                     $productName = $order->order_product_name;
                     $companyState = $order->order_company_state;
@@ -184,6 +186,7 @@ class NoteController extends Controller
                 }
 
                     Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
+                   */
                 }
 
                

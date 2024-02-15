@@ -170,7 +170,7 @@ new class extends Component {
                                         {{ $note->product_name }}
 
                                     </p>
-                                    <p class='text-sm text-gray-700 break-words dark:text-gray-500'>
+                                    <p class='text-sm text-gray-700 break-words dark:text-gray-400'>
                                         {{ Str::limit($note->description, 120) }}
 
 
@@ -231,7 +231,7 @@ new class extends Component {
                                     icon='shopping-cart' primary spinner label='Quero comprar' />
                             </div>
                             <div class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                <x-icon name="calendar" green xl class="w-4 h-4" /> {{ $note->created_at }}
+                                <x-icon name="calendar" green xl class="w-4 h-4" />  {{ $note->created_at->format('d-m-Y') }}
                             </div>
 
 

@@ -45,7 +45,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                 <div>
                     <div class='flex flex-col items-center justify-center w-full gap-4 xl:items-start xl:flex-row'>
 
-                        <div class='flex justify-center w-full gap-3 md:w-3/4'>
+                        <div class='flex justify-center w-full md:w-3/4'>
                             <x-card class='w-full max-w-3xl '>
 
                                 <div class=''>
@@ -80,13 +80,13 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             </div>
                                         @endforeach
                                     </div>
-                                    <footer class='flex flex-col gap-5 mt-10'>
-                                        <div class='flex border border-gray-100 rounded-md dark:border-gray-700'>
+                                    <footer class='flex flex-col items-center gap-5 mt-10 lg:items-start '>
+                                        <div
+                                            class='flex border border-gray-100 rounded-md max-w-64 md:max-w-96 xl:max-w-2xl dark:border-gray-700'>
                                             <x-card title="Comentários adicionais">
                                                 <x-slot name="action">
-
-
-                                                    <x-icon name="plus" md class="w-6 h-6 font-thin text-gray-500" />
+                                                    <x-icon name="clipboard" md
+                                                        class="w-6 h-6 font-thin text-orange-500" />
 
                                                 </x-slot>
                                                 <ul class='break-words'>
@@ -95,34 +95,70 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                                     </li>
                                                 </ul>
                                             </x-card>
+
                                         </div>
-                                        <div class='flex border border-gray-100 rounded-md dark:border-gray-700'>
+                                        <div
+                                            class='flex border border-gray-100 rounded-md max-w-64 md:max-w-96 xl:max-w-2xl dark:border-gray-700'>
                                             <x-card title="Documentos necessários">
                                                 <x-slot name="action">
                                                     <x-icon name="information-circle" md
                                                         class="w-6 h-6 font-thin text-orange-500" />
+
                                                 </x-slot>
-                                                <div>
-                                                    <p class='mb-1 text-sm font-semibold dark:text-gray-200 '>
+                                                <div class='mb-3'>
+                                                    <p class='mb-1 text-sm font-semibold dark:text-gray-300 '>
                                                         Documentos para a compra:</p>
                                                     <ul class='break-words'>
-                                                        <li class='flex items-center justify-start w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                                            <x-icon name="check" green class="w-6 h-6" />
-                                                            <p>Comprovante
+                                                        <li
+                                                            class='flex items-center justify-start w-full gap-2 mb-3 text-sm text-gray-500 dark:text-gray-400'>
+                                                            <span class='flex justify-start'>
+                                                                <x-icon name="check" green class="w-5 h-5" />
+                                                            </span>
+                                                            <p
+                                                                class='font-thin text-left text-gray-500 dark:text-gray-400'>
+                                                                Comprovante
                                                                 de Endereço Atualizado - de no máximo 3 meses (endereço
                                                                 do
                                                                 comprovante deve ser o mesmo endereço do cadastro).
                                                                 Exemplos: água, luz, telefone, internet, fatura do
                                                                 cartão de
                                                                 crédito.;
+                                                            </p>
                                                         </li>
-                                                        <p>
+                                                        <li
+                                                            class='flex items-center justify-start w-full gap-2 text-sm text-gray-500 dark:text-gray-400'>
+                                                            <span class='flex justify-start'>
+                                                                <x-icon name="check" green class="w-5 h-5" />
+                                                            </span>
+                                                            <p
+                                                                class='font-thin text-left text-gray-500 dark:text-gray-400'>
+                                                                RG E CPF OU CNH DIGITALIZADO.;
+                                                            </p>
+                                                        </li>
                                                     </ul>
                                                 </div>
-
-
+                                                <div>
+                                                    <p class='mb-1 text-sm font-semibold dark:text-gray-300 '>
+                                                        Documentos para a retirada:</p>
+                                                    <ul class='break-words'>
+                                                        <li
+                                                            class='flex items-center justify-start w-full gap-2 mb-3 text-sm text-gray-500 dark:text-gray-400'>
+                                                            <span class='flex justify-start'>
+                                                                <x-icon name="check" green class="w-5 h-5" />
+                                                            </span>
+                                                            <p
+                                                                class='font-thin text-left text-gray-500 dark:text-gray-400'>
+                                                                Chave Pix (imagem constando a titularidade) ou
+                                                                Comprovante Dados Bancários;
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </x-card>
+
                                         </div>
+
+
 
                                     </footer>
 
@@ -146,10 +182,11 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                     PAYMENT
                      --}}
                     <main class='flex justify-center w-full h-full'>
-                        <x-card class='w-auto h-full gap-3 dark:border-gray-700 dark:bg-gray-800'>
+                        <x-card class='w-auto h-full gap-3 rounded-lg dark:border-gray-700'>
+                           <div class='px-2'>
                             <div>
                                 <div class='mb-6'>
-                                    <p class='text-gray-900 font-2xl text-md dark:text-gray-400'>Comprar:</p>
+                                    <p class='text-gray-600 font-2xl text-md dark:text-gray-400'>Comprar:</p>
                                     <p class='text-lg text-gray-800 dark:text-gray-200'>{{ $note->product_name }}</p>
                                 </div>
                                 <div class='flex items-center justify-start gap-2 '>
@@ -262,10 +299,11 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                     @csrf
 
                                     <x-button sm primary type='submit' rounded spinner icon='shopping-cart'
-                                        class='w-full h-12 px-6' label='Comprar' />
+                                        class='w-full h-12 mt-4' label='Comprar' />
                                 </form>
 
                             </x-slot>
+                            </div>
                         </x-card>
 
                     </main>

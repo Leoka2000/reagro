@@ -6,7 +6,7 @@
     </x-slot>
 
    <div class="py-12">
-        <div class="px-6 mx-auto max-w-7xl lg:px-8">
+        <div class="px-4 mx-auto sm:px-6 max-w-7xl lg:px-8">
             <div class="overflow-hidden bg-white border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
                     <div class="flex items-center">
@@ -67,7 +67,7 @@
                         <h1 class='text-lg'>Sou um vendedor e desejo publicar um anúncio na plataforma
                         </h1>
                     </div>
-                    <x-button class='w-full h-12' rounded href=# primary icon="shopping-cart" >Quero vender</x-button>
+                    <x-button class='w-full h-12' wire:navigate rounded href="{{ route('notes.sell-index') }}"  primary icon="shopping-cart" >Quero vender</x-button>
                 </div>
                            <div class='w-full px-8 py-12 bg-white border border-gray-200 rounded-md shadow-md dark:bg-gray-800 dark:border-gray-700 sm:w-96'>
                     <span>
@@ -92,7 +92,7 @@
                     <div class='my-3'>
                         <h1 class='text-lg'>Sou um comprador e desejo analizar os anúncios disponíveis</h1>
                     </div>
-                    <x-button  class='w-full h-12'  primary rounded icon="currency-dollar">Ver anúncios</x-button>
+                    <x-button  class='w-full h-12' href="{{ route('notes.buy-index') }}" wire:navigate  primary rounded icon='eye' >Ver anúncios</x-button>
                 </div>
             </main>
         </div>

@@ -10,21 +10,21 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <wireui:scripts />
+    <wireui:scripts />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="antialiased dark">
-  <x-dialog />
+    <x-dialog />
     <div
         class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots-darker dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         @if (Route::has('login'))
             <livewire:welcome.navigation />
         @endif
 
-        <div class="mx-auto p-2d sm:px-5 max-w-7xl lg:p-8">
+        <div class="px-3 mx-auto sm:px-5 max-w-7xl lg:p-8">
             <div class="flex justify-center">
                 <div class='flex items-center justify-center w-24 h-24 mt-2'>
                     <img class='object-cover w-full h-full rounded-md' src="{{ asset('logo.png') }}" alt="sheesh"
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-center px-0 mt-16 sm:items-center sm:justify-between">
+            <div class="flex justify-center px-0 py-10 sm:items-center sm:justify-between">
                 <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-start">
                     <div class="flex items-center gap-4">
                         <a href="https://www.linkedin.com/in/leoreus/"

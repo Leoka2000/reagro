@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('order_product_name')->nullable();
             $table->string('order_paid')->default('unpaid');
             $table->string('order_company_state')->nullable();
+            $table->string('order_product_quantity')->nullable();
             $table->string('order_address_city')->nullable();
-            $table->string('order_postal_code')->nullable();;
+            $table->string('order_postal_code')->nullable();
             $table->string('order_delivery_address')->nullable();
             $table->string('order_residue_type')->nullable();
             $table->string('company_name')->nullable();
-            $table->integer('total_price')->nullable();
+         //   $table->decimal('total_price', 6, 2)->nullable(); this can have problems, we just dont tell this in the email
             $table->string('session_id');
             $table->timestamps();
         });
