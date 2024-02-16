@@ -48,7 +48,7 @@ Route::view('quero-vender', 'notes.sell-index')
 ->middleware(['auth'])
 ->name('notes.sell-index');
 
-Route::get('/auth/google/', [ProviderController::class, 'redirect'] )->name('google-auth');
+Route::get('/auth/google/redirect', [ProviderController::class, 'redirect'] )->name('google-auth');
 Route::get('/auth/google/callback', [ProviderController::class, 'callbackGoogle'] );
 
 

@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\Note;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Hash;
 
 class ProviderController extends Controller
 {
@@ -21,16 +24,17 @@ class ProviderController extends Controller
         try {
             $google_user = Socialite::driver('google')->stateless()->user();
             $user = User::where('google_id', $google_user->getId())->first();
-    
+
             if (!$user) {
                 $user = User::where('email', $google_user->getEmail())->first();
-    
+
                 if (!$user) {
                     // If no user with the Google ID or email exists, create a new user
                     $user = User::create([
                         'name' => $google_user->getName(),
                         'email' => $google_user->getEmail(),
-                        'google_id' => $google_user->getId()
+                        'google_id' => $google_user->Hash::make(\Illuminate\Support\Str::random(24)),
+                        'password' => Hash::make(\Illuminate\Support\Str::random(24)),
                     ]);
                 } else {
                     // If a user with the email exists but without Google ID, update the user
@@ -39,10 +43,12 @@ class ProviderController extends Controller
                     ]);
                 }
             }
-    
+
+            // Manually log in the user
             Auth::login($user);
-    
-            return redirect()->intended('dashboard');
+
+            return redirect()->route('dashboard'); // Assuming you have a named route for your dashboard
+
         } catch (ClientException $e) {
             error_log($e);
         }
