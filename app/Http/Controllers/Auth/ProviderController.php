@@ -21,23 +21,28 @@ class ProviderController extends Controller
         try {
             $google_user = Socialite::driver('google')->stateless()->user();
             $user = User::where('google_id', $google_user->getId())->first();
-
+    
             if (!$user) {
-                $new_user = User::create([
-                    'name' => $google_user->getName(),
-                    'email' => $google_user->getEmail(),
-                    'google_id' => $google_user->getId()
-                ]);
-
-                Auth::login($new_user);
-
-                return redirect()->intended('dashboard');
-            } else {
-                Auth::login($user);
-
-                return redirect()->intended('dashboard');
+                $user = User::where('email', $google_user->getEmail())->first();
+    
+                if (!$user) {
+                    // If no user with the Google ID or email exists, create a new user
+                    $user = User::create([
+                        'name' => $google_user->getName(),
+                        'email' => $google_user->getEmail(),
+                        'google_id' => $google_user->getId()
+                    ]);
+                } else {
+                    // If a user with the email exists but without Google ID, update the user
+                    $user->update([
+                        'google_id' => $google_user->getId()
+                    ]);
+                }
             }
-
+    
+            Auth::login($user);
+    
+            return redirect()->intended('dashboard');
         } catch (ClientException $e) {
             error_log($e);
         }

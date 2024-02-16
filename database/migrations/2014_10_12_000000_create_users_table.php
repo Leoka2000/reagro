@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('role')->default('standard');
             $table->integer('coins')->default('0');
-            $table->string('email')->unique();
+            $table->string('email'); //i took out the unique for google to work
             $table->string('google_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
