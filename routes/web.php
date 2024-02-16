@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Laravel\Socialite\Facades\Socialite;
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\Auth\ProviderController;
 
 use App\Models\Note;
 use App\Models\User;
@@ -46,6 +48,8 @@ Route::view('quero-vender', 'notes.sell-index')
 ->middleware(['auth'])
 ->name('notes.sell-index');
 
+Route::get('/auth/google/', [ProviderController::class, 'redirect'] )->name('google-auth');
+Route::get('/auth/google/callback', [ProviderController::class, 'callbackGoogle'] );
 
 
 

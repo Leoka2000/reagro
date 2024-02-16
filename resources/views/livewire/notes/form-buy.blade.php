@@ -48,19 +48,19 @@ new class extends Component {
     private function getFilteredNotes()
     {
         // Filter notes based on the selected area
-        $query = Note::query();
+         $query = Note::query();
 
-        // Filter notes based on the selected type
-        if ($this->selectedType != 'None') {
-            $query->where('residue_type', $this->selectedType);
-        }
+    // Filter notes based on the selected type
+    if ($this->selectedType && $this->selectedType != 'None') {
+        $query->where('residue_type', $this->selectedType);
+    }
 
-        // Filter notes based on the selected state
-        if ($this->selectedState != 'None') {
-            $query->where('company_state', $this->selectedState);
-        }
+    // Filter notes based on the selected state
+    if ($this->selectedState && $this->selectedState != 'None') {
+        $query->where('company_state', $this->selectedState);
+    }
 
-        return $query->get();
+    return $query->get();
     }
 
     public function placeholder()
@@ -103,7 +103,7 @@ new class extends Component {
                         </span>
                     </x-slot>
                     <x-native-select wire:model="selectedType" wire:change="$refresh" icon='filter' label="Selecione">
-                        <option value='None'>None</option>
+                        <option value='None'>Filtro</option>
                         <option value='Sólido'>Sólido</option>
                         <option value='Líquido'>Líquido</option>
                         <option value='Semisólido'>Semisólido</option>
@@ -121,6 +121,7 @@ new class extends Component {
                     </x-slot>
 
                     <x-native-select wire:model="selectedState" wire:change="$refresh" icon='filter' label="Cidade">
+                           <option value='None'>Filtro</option>
                         <option value='Rio Grande do Sul'>Rio Grande do Sul</option>
                         <option value='Santa Catarina'>Santa Catarina</option>
                         <option value='Paraná'>Paraná</option>
