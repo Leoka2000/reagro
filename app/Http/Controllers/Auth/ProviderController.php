@@ -13,13 +13,13 @@ class ProviderController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function callbackGoogle()
     {
         try {
-            $google_user = Socialite::driver('google')->user();
+            $google_user = Socialite::driver('google')->stateless()->user();
             $user = User::where('google_id', $google_user->getId())->first();
 
             if (!$user) {
