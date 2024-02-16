@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('price_perunit')->nullable();
             $table->text('description')->nullable();
             $table->string('residue_type')->nullable();
-            $table->string('image');
+            $table->text('image'); //MT IMPORTANTE SER TEXT PRA FUNCIONAR MULTIPLAS IMAGENS
             $table->boolean('accept_terms')->nullable();
             $table->boolean('is_published')->default(false);
             $table->integer('heart_count')->default(0);

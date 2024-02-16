@@ -92,7 +92,7 @@
                     <div class='my-3'>
                         <h1 class='text-lg'>Sou um comprador e desejo analizar os anúncios disponíveis</h1>
                     </div>
-                    <x-button  class='w-full h-12' href="{{ route('notes.buy-index') }}" wire:navigate  primary rounded icon='eye' >Ver anúncios</x-button>
+                    <x-button  class='w-full h-12' href="{{ route('notes.buy-index') }}" wire:navigate sp  primary rounded icon='eye' >Ver anúncios</x-button>
                 </div>
             </main>
         </div>

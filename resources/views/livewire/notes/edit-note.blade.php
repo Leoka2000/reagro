@@ -110,7 +110,8 @@ new #[Layout('layouts.app')] class extends Component {
 
 
 <section class='px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8'>
- <x-slot name="header">
+    <x-button icon="arrow-left" class="mb-8" href="{{ route('notes.buy-index') }}"> Voltar</x-button>
+    <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
             Editar anúncio
         </h2>
@@ -165,7 +166,7 @@ new #[Layout('layouts.app')] class extends Component {
                 </div>
                 <div class="flex flex-col gap-6 my-6">
                     <x-textarea label="Detalhes do anúncio" wire:model.defer="companyDescription" />
-                 
+
                 </div>
 
 
@@ -176,7 +177,7 @@ new #[Layout('layouts.app')] class extends Component {
             <x-slot name="footer" class='mt-24'>
                 <div class="flex items-center justify-end tp-5 gap-x-3">
 
-                    <x-button wire:click="saveNote" label="Salvar" spinner="save" primary />
+                    <x-button wire:click="saveNote" label="Salvar" spinner='saveNote' primary />
                 </div>
             </x-slot>
     </x-card>

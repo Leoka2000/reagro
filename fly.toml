@@ -27,6 +27,10 @@ APP_URL = "https://reagro.fly.dev"
 [deploy]
 release_command = "php /var/www/html/artisan migrate --force" 
 
+[mounts]
+  source = "storagevolume"
+  destination = "/var/www/html/storage/"
+
 [http_service]
   internal_port = 8080
   force_https = true

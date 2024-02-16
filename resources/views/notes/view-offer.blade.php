@@ -41,7 +41,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
             </x-slot>
 
             <div>
-                <x-button icon="arrow-left" class="mb-8" href="{{ route('dashboard') }}"> Voltar</x-button>
+                <x-button icon="arrow-left" class="mb-8" href="{{ route('notes.buy-index') }}"> Voltar</x-button>
                 <div>
                     <div class='flex flex-col items-center justify-center w-full gap-4 xl:items-start xl:flex-row'>
 

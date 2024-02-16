@@ -75,7 +75,7 @@
                         </label>
                         <x-icon name="moon" class="w-5 h-5 text-gray-400" />
                     </div>
-                    <div class='flex'>
+                    <div class='flex mt-2'>
                         <livewire:email-company.send-contact />
                     </div>
                 </div>

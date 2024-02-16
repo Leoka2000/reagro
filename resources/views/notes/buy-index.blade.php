@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="px-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <x-button icon="arrow-left" class="mb-8" href="{{ route('dashboard') }}"> Voltar</x-button>
+            <x-button icon="arrow-left" spinner class="mb-8" href="{{ route('dashboard') }}"> Voltar</x-button>
             <div class="overflow-hidden bg-white rounded shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <livewire:notes.form-buy lazy />

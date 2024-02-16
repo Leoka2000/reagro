@@ -82,7 +82,7 @@ new class extends Component {
         $this->dialog()->show([
             'icon' => 'success',
             'title' => 'Anúncio publicado!',
-            'description' => 'Agora, você poderá vizualizar, editar, ou deletar o seu anúncio em nossa plataforma',
+            'description' => 'Agora, você poderá visualizar, editar, ou deletar o seu anúncio em nossa plataforma',
         ]);
     }
 }; ?>
@@ -116,7 +116,7 @@ new class extends Component {
 
             <x-native-select class='z-10' label="Tipo de unidade" placeholder="Select an option"
                 wire:model.defer="pricePerUnit" :options="['Litros', 'Mililitros', 'Gramas', 'Kilos']" />
-            <x-input icon='currency-dollar' label="Valor total da sua oferta (apenas números!)" placeholder="200.00"
+            <x-input icon='currency-dollar' label="Valor total da sua oferta (apenas números, use pontos, não vírgulas!)" placeholder="200.00"
                 wire:model.defer="companyPrice" />
             <x-input multiple type="file" wire:model="companyImage"
                 label='Fotos que deseja mostrar ao cliente. (suas fotos não podem ser maiores que 1,5MB)'
@@ -150,7 +150,7 @@ new class extends Component {
             <x-slot name="footer" class='mt-24'>
                 <div class="flex tp-5 gap-x-3">
 
-                    <x-button wire:click="submit" label="Criar" icon='plus' spinner="save" primary />
+                    <x-button wire:click="submit" label="Criar" icon='plus' spinner="submit" primary />
                 </div>
             </x-slot>
     </x-card>

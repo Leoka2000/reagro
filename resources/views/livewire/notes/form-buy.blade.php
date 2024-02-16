@@ -132,108 +132,113 @@ new class extends Component {
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach ($notes as $note)
                         <x-card class='relative' wire:key='{{ $note->id }}'>
+                            <main class='flex flex-col justify-between h-full'>
+                                <div>
+                                    <x-badge rounded sm positive
+                                        class='absolute text-gray-700 h-7 top-10 right-10 positive'
+                                        icon='exclamation-circle' label="Venda imediata" />
 
-                            <x-badge rounded sm positive class='absolute text-gray-700 h-7 top-10 right-10 positive'
-                                icon='exclamation-circle' label="Venda imediata" />
+                                    <header>
+                                        <div class="block">
 
-                            <header>
-                                <div class="flex justify-center">
+                                            <div class='flex items-center justify-center md:max-w-96 md:max-h-96'>
+                                                @php
+                                                    // Split the image string into an array using a delimiter (assuming comma here)
+                                                    $imageArray = explode(',', $note->image);
 
-                                    <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
-                                        @php
-                                            // Split the image string into an array using a delimiter (assuming comma here)
-                                            $imageArray = explode(',', $note->image);
+                                                    // Select the first element of the array
+                                                    $firstImage = reset($imageArray);
+                                                @endphp
 
-                                            // Select the first element of the array
-                                            $firstImage = reset($imageArray);
-                                        @endphp
+                                                <img class='object-cover w-full h-full rounded-md bg-slate-300'
+                                                    src="{{ asset('storage/' . $firstImage) }}" alt="Image"
+                                                    title="product image" />
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class='mt-5'>
+                                        <div class='pb-4'>
+                                            <p
+                                                class='text-base font-extrabold break-words text-gray-950 dark:text-gray-200'>
 
-                                        <img class='object-cover w-full h-full rounded-md bg-slate-300'
-                                            src="{{ asset('storage/' . $firstImage) }}" alt="Image" title="sheesh" />
+                                                {{ $note->product_name }}
+
+                                            </p>
+                                            <p class='text-sm text-gray-700 break-words dark:text-gray-400'>
+                                                {{ Str::limit($note->description, 120) }}
+
+
+                                            <div class='pt-2 pb-4'>
+                                                <x-badge class='h-7' rounded positive outline
+                                                    label="R$ {{ $note->price }}" />
+
+                                            </div>
+                                        </div>
+                                        <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
+                                            <li
+                                                class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                                <x-icon name="check" green xl class="w-4 h-4" /> Frete grátis
+                                            </li>
+                                            <li
+                                                class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                                <x-icon name="globe" green xl class="w-4 h-4" />
+                                                {{ $note->address_city }}
+                                            </li>
+                                            <li
+                                                class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                                <x-icon name="user" green xl class="w-4 h-4" /> Publicado por:
+                                                {{ $note->company_name }}
+                                            </li>
+                                            <li
+                                                class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                                <x-icon name="beaker" green xl class="w-4 h-4" /> Tipo:
+                                                {{ $note->residue_type }}
+                                            </li>
+
+                                            @if ($note->paid === 'paid')
+                                                <li
+                                                    class='flex items-center gap-2 text-xs text-red-500 dark:text-red-400'>
+                                                    <x-icon name="exclamation-circle" green negative xl
+                                                        class="w-4 h-4" />
+                                                    Indisponível
+                                                </li>
+                                            @else ($note->paid === 'unpaid')
+                                                <li
+                                                    class='flex items-center gap-2 text-xs text-green-500 dark:text-green-400'>
+                                                    <x-icon name="exclamation-circle" green xl class="w-4 h-4" />
+                                                    Disponível
+                                                </li>
+                                            @endif
+                                        </ul>
                                     </div>
 
-
-                                    <!--
-                            <div class='flex items-center justify-center md:max-w-80 md:max-h-80'>
-
-
-                                <img class='object-cover w-full h-full rounded-md bg-slate-300' src="{{ asset('logo.png') }}" alt="Image" title="images" />
-                            </div>
-   -->
-
+                                 
                                 </div>
-                            </header>
-                            <div class='mt-5'>
-                                <div class='pb-4'>
-                                    <p class='text-base font-extrabold break-words text-gray-950 dark:text-gray-200'>
-
-                                        {{ $note->product_name }}
-
-                                    </p>
-                                    <p class='text-sm text-gray-700 break-words dark:text-gray-400'>
-                                        {{ Str::limit($note->description, 120) }}
+                                <footer>
+                                   <div class='flex items-center justify-end gap-2'>
+                                        @can('update', $note)
+                                            <!-- Update button -->
+                                            <x-button.circle href="{{ route('notes.edit', $note) }}" sm green outline
+                                                icon="pencil-alt"></x-button.circle>
+                                        @endcan
 
 
-                                    <div class='pt-2 pb-4'>
-                                        <x-badge class='h-7' rounded positive outline
-                                            label="R$ {{ $note->price }}" />
-
+                                        @can('delete', $note)
+                                            <x-button.circle sm icon="trash" red outline
+                                                wire:click="openModal('{{ $note->id }}')"></x-button.circle>
+                                        @endcan
                                     </div>
-                                </div>
-                                <ul class='flex flex-col gap-2 mb-4 text-sm sm:text-base'>
-                                    <li class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                        <x-icon name="check" green xl class="w-4 h-4" /> Frete grátis
-                                    </li>
-                                    <li class='flex items-center w-full gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                        <x-icon name="globe" green xl class="w-4 h-4" /> {{ $note->address_city }}
-                                    </li>
-                                    <li class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                        <x-icon name="user" green xl class="w-4 h-4" /> Publicado por:
-                                        {{ $note->company_name }}
-                                    </li>
-                                    <li class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                        <x-icon name="beaker" green xl class="w-4 h-4" /> Tipo:
-                                        {{ $note->residue_type }}
-                                    </li>
-                                    
-                                    @if ($note->paid === 'paid')
-                                        <li class='flex items-center gap-2 text-xs text-red-500 dark:text-red-400'>
-                                            <x-icon name="exclamation-circle" green negative xl class="w-4 h-4" />
-                                            Indisponível
-                                        </li>
-                                    @else ($note->paid === 'unpaid')
-                                        <li class='flex items-center gap-2 text-xs text-green-500 dark:text-green-400'>
-                                            <x-icon name="exclamation-circle" green xl class="w-4 h-4" /> Disponível
-                                        </li>
-                                    @endif
-
-
-
-
-                                </ul>
-                            </div>
-
-                            <div class='flex items-center justify-end gap-2'>
-                                @can('update', $note)
-                                    <!-- Update button -->
-                                    <x-button.circle href="{{ route('notes.edit', $note) }}" sm green outline
-                                        icon="pencil-alt"></x-button.circle>
-                                @endcan
-
-
-                                @can('delete', $note)
-                                    <x-button.circle sm icon="trash" red outline
-                                        wire:click="openModal('{{ $note->id }}')"></x-button.circle>
-                                @endcan
-                            </div>
-                            <div class='w-full my-5'>
-                                <x-button rounded sm class='w-full h-12' href="{{ route('notes.view-offer', $note) }}"
-                                    icon='shopping-cart' primary spinner label='Quero comprar' />
-                            </div>
-                            <div class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
-                                <x-icon name="calendar" green xl class="w-4 h-4" />  {{ $note->created_at->format('d-m-Y') }}
-                            </div>
-
+                                    <div class='w-full my-5'>
+                                        <x-button rounded sm class='w-full h-12'
+                                            href="{{ route('notes.view-offer', $note) }}" icon='shopping-cart' primary
+                                            spinner label='Quero comprar' />
+                                    </div>
+                                    <div class='flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400'>
+                                        <x-icon name="calendar" green xl class="w-4 h-4" />
+                                        {{ $note->created_at->format('d-m-Y') }}
+                                    </div>
+                                </footer>
+                            </main>
 
                         </x-card>
                         @if ($showModal)
@@ -242,9 +247,9 @@ new class extends Component {
                                     class='flex flex-col h-auto gap-2 p-12 bg-gray-900 dark:text-gray-300 w-96 rounded-xl '>
                                     <p class='mb-4 text-gray-300 bg-gray-900 sm:text-base'>Tem certeza que dejesas
                                         deletar o anúncio?</p>
-                                    <x-button primary icon='arrow-left' wire:click="closeModal">Sair</x-button>
-                                    <x-button flat negative outline icon='trash'
-                                        wire:click="delete('{{ $noteToDelete->id }}')">Continuar</x-button>
+                                    <x-button primary spinner icon='arrow-left' wire:click="closeModal">Sair</x-button>
+                                    <x-button flat negative spinner outline icon='trash'
+                                      wire:click="delete('{{ $noteToDelete->id }}')">Continuar</x-button>
                                 </div>
 
                             </x-modal>
