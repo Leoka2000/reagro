@@ -11,7 +11,6 @@ use App\Http\Controllers\NoteController;
 new #[Layout('layouts.app')] class extends Component {}; ?>
 
 <div>
-
     <x-app-layout>
 
         @if ($showImageModal)
@@ -30,7 +29,6 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                 </x-card>
             </x-modal>
         @endif
-
         <div class='flex justify-center pb-4 my-8'>
 
             <x-slot name="header">
@@ -82,7 +80,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                     </div>
                                     <footer class='flex flex-col items-center gap-5 mt-10 lg:items-start '>
                                         <div
-                                            class='flex border border-gray-100 rounded-md max-w-64 md:max-w-96 xl:max-w-2xl dark:border-gray-700'>
+                                            class='flex w-full border border-gray-100 rounded-md dark:border-gray-700'>
                                             <x-card title="Comentários adicionais">
                                                 <x-slot name="action">
                                                     <x-icon name="clipboard" md
@@ -98,7 +96,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
 
                                         </div>
                                         <div
-                                            class='flex border border-gray-100 rounded-md max-w-64 md:max-w-96 xl:max-w-2xl dark:border-gray-700'>
+                                            class='flex w-full border border-gray-100 rounded-md dark:border-gray-700'>
                                             <x-card title="Documentos necessários">
                                                 <x-slot name="action">
                                                     <x-icon name="information-circle" md
@@ -182,7 +180,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                     PAYMENT
                      --}}
                     <main class='flex justify-center w-full h-full'>
-                        <x-card class='gap-3 rounded-lg w-3xl dark:border-gray-700'>
+                        <x-card class='gap-3 rounded-lg md:w-3xl dark:border-gray-700'>
                             <div class=''>
                                 <div>
                                     <div class='mb-6'>

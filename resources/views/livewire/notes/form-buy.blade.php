@@ -227,6 +227,10 @@ new class extends Component {
                                         @can('delete', $note)
                                             <x-button.circle sm icon="trash" red outline
                                                 wire:click="openModal('{{ $note->id }}')"></x-button.circle>
+
+                                                @else
+                                                 <x-button.circle sm icon="trash" red outline
+                                                wire:click="openModal('{{ $note->id }}')"></x-button.circle>
                                         @endcan
                                     </div>
                                     <div class='w-full my-5'>
@@ -245,11 +249,11 @@ new class extends Component {
                         @if ($showModal)
                             <x-modal wire:model="showModal" class="" title="Simple Modal">
                                 <div
-                                    class='flex flex-col h-auto gap-2 p-12 bg-gray-900 dark:text-gray-300 w-96 rounded-xl '>
-                                    <p class='mb-4 text-gray-300 bg-gray-900 sm:text-base'>Tem certeza que dejesas
+                                    class='flex flex-col h-auto gap-2 p-12 bg-white dark:bg-gray-900 dark:text-gray-300 w-96 rounded-xl '>
+                                    <p class='mb-4 text-gray-700 dark:bg-gray-900 sm:text-base'>Tem certeza que dejesas
                                         deletar o anúncio?</p>
-                                    <x-button primary spinner icon='arrow-left' wire:click="closeModal">Sair</x-button>
-                                    <x-button flat negative spinner outline icon='trash'
+                                    <x-button primary icon='arrow-left' wire:click="closeModal">Sair</x-button>
+                                    <x-button flat negative spinner='delete' outline icon='trash'
                                       wire:click="delete('{{ $noteToDelete->id }}')">Continuar</x-button>
                                 </div>
 

@@ -33,7 +33,7 @@ class ProviderController extends Controller
                     $user = User::create([
                         'name' => $google_user->getName(),
                         'email' => $google_user->getEmail(),
-                        'google_id' => $google_user->Hash::make(\Illuminate\Support\Str::random(24)),
+                        'google_id' => $google_user->getId(),
                         'password' => Hash::make(\Illuminate\Support\Str::random(24)),
                     ]);
                 } else {

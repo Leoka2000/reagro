@@ -40,6 +40,10 @@ new #[Layout('layouts.guest')] class extends Component
 <div>
     <form wire:submit="register">
     <h1 class='mb-2 text-lg font-bold text-gray-700 dark:text-gray-300'> Registrar-se</h1>
+     <div class='mb-4 w-ull'>
+        <x-button href="{{route('google-auth')}}"  outline class='w-full'> Registro com Google <img class='w-6 h-6' src="{{ asset('google.png') }}" />
+        </x-button>
+    </div>
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Nome')" />

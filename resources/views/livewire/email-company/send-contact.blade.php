@@ -46,13 +46,13 @@ new class extends Component {
         <p class='text-xs'>Contate-nos</p>
     </div>
     @if ($showModal)
-        <x-modal wire:model="showModal" class="bg-gray-800 " title="Simple Modal">
+        <x-modal wire:model="showModal" title="Simple Modal">
 
 
             <div
-                class='flex flex-col items-center justify-center gap-2 p-5 mb-2 text-gray-300 bg-gray-800 rounded-md dark:bg-gray-800 md:p-12 dark:text-gray-400 '>
+                class='relative flex flex-col items-center justify-center w-full max-w-4xl gap-2 p-5 mb-2 text-gray-600 bg-white rounded-md dark:bg-gray-800 md:p-12 dark:text-gray-400 '>
 
-                <p class='w-64 mb-5 text-xl font-bold text-center dark:text-gray-300'>
+                <p class='w-full pr-10 mb-5 text-xl font-bold text-left sm:text-center sm:w-64 dark:text-gray-300'>
                     Há dúvidas? Conte-nos.
                 </p>
 
@@ -69,10 +69,10 @@ new class extends Component {
                     <x-textarea class='text-gray-700 dark:text-gray-400' type="text" id="topic"
                         wire:model.defer="topic" />
 
-                    <x-button class='mt-5' spinner='save' icon='paper-airplane' primary
+                    <x-button class='mt-5' spinner="submit" icon='paper-airplane' primary
                         type="submit">Enviar</x-button>
-                    <x-button class='' spinner icon='x-circle' outline red
-                        wire:click='closeModal'>Cancelar</x-button>
+                    <x-button.circle class='absolute sm:top-4 top-2 right-2 sm:right-4' md outline  spinner="closeModal"
+                        icon='x-circle' wire:click='closeModal'>Cancelar</x-button>
                 </form>
 
             </div>
