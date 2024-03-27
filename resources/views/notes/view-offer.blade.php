@@ -38,13 +38,14 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                 </h2>
             </x-slot>
 
-            <div>
-                <x-button icon="arrow-left" class="mb-8" href="{{ route('notes.buy-index') }}"> Voltar</x-button>
+            <div class='max-w-6xl px-2'>
+               
                 <div>
-                    <div class='flex flex-col items-center justify-center w-full gap-4 xl:items-start xl:flex-row'>
+                 <x-button icon="arrow-left" class="mb-8" href="{{ route('notes.buy-index') }}"> Voltar</x-button>
+                    <div class='flex flex-col items-center justify-center w-full gap-5 md:gap-3 lg:items-start lg:flex-row'>
 
                         <div class='flex justify-center w-full md:w-3/4'>
-                            <x-card class='w-full max-w-3xl '>
+                            <x-card class='w-full lg:max-w-3xl '>
 
                                 <div class=''>
                                     <div class='pb-4'>
@@ -60,7 +61,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             <div class='font-thin text-gray-500 dark:text-gray-400'>
                                                 Publicado em:
                                                 <strong class='text-gray-800 dark:text-gray-300'>
-                                                    {{ $note->created_at->format('d-m-Y') }}<strong>
+                                                    {{ $note->created_at->format('d-m-Y') }}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -179,8 +180,8 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                      --}}{{-- 
                     PAYMENT
                      --}}
-                    <main class='flex justify-center w-full h-full'>
-                        <x-card class='gap-3 rounded-lg md:w-3xl dark:border-gray-700'>
+                    <main class='flex justify-center w-full md:w-3/4 lg:w-96'>
+                        <x-card class='gap-3 rounded-lg dark:border-gray-700'>
                             <div class=''>
                                 <div>
                                     <div class='mb-6'>
@@ -213,7 +214,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                         <div class='font-thin text-left text-gray-500 dark:text-gray-400'>
                                             Publicado por:
                                             <strong
-                                                class='text-gray-800 dark:text-gray-300'>{{ $note->company_name }}<strong>
+                                                class='text-gray-800 dark:text-gray-300'>{{ $note->company_name }}</strong>
                                         </div>
                                     </div>
 
@@ -224,7 +225,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                         <div class='font-thin text-left text-gray-500 dark:text-gray-400'>
                                             Nome:
                                             <strong
-                                                class='text-gray-800 dark:text-gray-300'>{{ $note->product_name }}<strong>
+                                                class='text-gray-800 dark:text-gray-300'>{{ $note->product_name }}</strong>
                                         </div>
                                     </div>
                                     <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
@@ -237,7 +238,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             <strong
                                                 class='text-gray-800 dark:text-gray-300'>{{ $note->product_quantity }}
 
-                                                <strong>
+                                                </strong>
                                         </div>
                                     </div>
                                     <div class='flex items-center justify-start w-full gap-1 mb-3 text-sm'>
@@ -251,7 +252,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                             <strong class='text-gray-800 dark:text-gray-300'>
                                                 {{ $note->price_perunit }}
 
-                                                <strong>
+                                                </strong>
                                         </div>
                                     </div>
 
@@ -262,7 +263,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                                         <div class='font-thin text-gray-500 dark:text-gray-400'>
                                             Preço total:
                                             <strong class='text-green-600 dark:text-green-400'> R$ {{ $note->price }}
-                                                <strong>
+                                                </strong>
                                         </div>
                                     </div>
                                     <div class='w-full'>
