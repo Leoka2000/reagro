@@ -27,10 +27,7 @@ new #[Layout('layouts.guest')] class extends Component {
 <div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class='mb-4 w-ull'>
-        <x-button href="{{route('google-auth')}}"  outline class='w-full'> Login com Google <img class='w-6 h-6' src="{{ asset('google.png') }}" />
-        </x-button>
-    </div>
+   
     <h1 class='mb-2 text-lg font-bold text-gray-700 dark:text-gray-300'> Login</h1>
     <form wire:submit="login">
         <!-- Email Address -->

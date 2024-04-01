@@ -121,10 +121,9 @@ new class extends Component {
                     </x-slot>
 
                     <x-native-select wire:model="selectedState" wire:change="$refresh" icon='filter' label="Cidade">
-                           <option value='None'>Filtro</option>
+                          
                         <option value='Rio Grande do Sul'>Rio Grande do Sul</option>
-                        <option value='Santa Catarina'>Santa Catarina</option>
-                        <option value='Paraná'>Paraná</option>
+                  
                     </x-native-select>
                 </x-card>
 

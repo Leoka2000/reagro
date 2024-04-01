@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('role')->default('standard');
             $table->integer('coins')->default('0');
+            $table->string('address_city')->nullable();
+            $table->string('delivery_address')->nullable(); // Delivery address eh na vdd a 'rua'
+            $table->string('company_state')->nullable();
+            $table->string('company_postal_code')->nullable();
             $table->string('email'); //i took out the unique for google to work
             $table->string('google_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();

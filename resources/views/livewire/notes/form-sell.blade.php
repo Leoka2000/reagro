@@ -18,7 +18,7 @@ new class extends Component {
     public $companyEmail;
     public $companyPhone;
     public $companyState;
-    public $deliveryAddress;
+    public $deliveryAddress; // rua
     public $companyPostalCode;
     public $productQuantity;
     public $companyPrice;
@@ -85,6 +85,154 @@ new class extends Component {
             'description' => 'Agora, você poderá visualizar, editar, ou deletar o seu anúncio em nossa plataforma',
         ]);
     }
+
+    public function cities()
+{
+    return [
+        'Porto Alegre',
+        'Caxias do Sul',
+        'Pelotas',
+        'Canoas',
+        'Santa Maria',
+        'Gravataí',
+        'Viamão',
+        'Novo Hamburgo',
+        'São Leopoldo',
+        'Rio Grande',
+        'Alvorada',
+        'Passo Fundo',
+        'Sapucaia do Sul',
+        'Uruguaiana',
+        'Santa Cruz do Sul',
+        'Cachoeirinha',
+        'Bagé',
+        'Bento Gonçalves',
+        'Santa Rosa',
+        'Santa Maria',
+        'Camaquã',
+        'Esteio',
+        'Santana do Livramento',
+        'São Gabriel',
+        'Ijuí',
+        'Alegrete',
+        'Tramandaí',
+        'Capão da Canoa',
+        'São Lourenço do Sul',
+        'Vacaria',
+        'Cachoeira do Sul',
+        'Guaíba',
+        'Santo Ângelo',
+        'Osório',
+        'Farroupilha',
+        'Torres',
+        'Erechim',
+        'Canela',
+        'São Borja',
+        'Montenegro',
+        'Taquara',
+        'Carazinho',
+        'Lajeado',
+        'São Sebastião do Caí',
+        'Rio Pardo',
+        'Santiago',
+        'Venâncio Aires',
+        'São Francisco de Paula',
+        'São Jerônimo',
+        'Igrejinha',
+        'Tapejara',
+        'São José do Norte',
+        'Garibaldi',
+        'São Luiz Gonzaga',
+        'Dom Pedrito',
+        'Tapes',
+        'Encantado',
+        'Sobradinho',
+        'Rolante',
+        'Arroio do Meio',
+        'Marau',
+        'Gramado',
+        'Cidreira',
+        'Constantina',
+        'Teutônia',
+        'Charqueadas',
+        'São Sepé',
+        'Butiá',
+        'Veranópolis',
+        'Carlos Barbosa',
+        'Espumoso',
+        'Ibirubá',
+        'Arroio Grande',
+        'Barra do Ribeiro',
+        'São Borja',
+        'São Marcos',
+        'São Pedro do Sul',
+        'São José dos Ausentes',
+        'São Valentim do Sul',
+        'Cacequi',
+        'São Vicente do Sul',
+        'São João do Polêsine',
+        'São Francisco de Assis',
+        'São Lourenço do Sul',
+        'São Gabriel',
+        'São Miguel das Missões',
+        'São Pedro da Serra',
+        'São Valentim',
+        'Sapiranga',
+        'Sapucaia',
+        'Sarandi',
+        'Seberi',
+        'Sede Nova',
+        'Serafina Corrêa',
+        'Silveira Martins',
+        'Sinimbu',
+        'Sobradinho',
+        'Soledade',
+        'Tabaí',
+        'Tapejara',
+        'Tapes',
+        'Taquara',
+        'Taquari',
+        'Teutônia',
+        'Tio Hugo',
+        'Tramandaí',
+        'Travesseiro',
+        'Três de Maio',
+        'Três Palmeiras',
+        'Três Passos',
+        'Triunfo',
+        'Tucunduva',
+        'Tupanciretã',
+        'Tupandi',
+        'Turvo',
+        'Ubiretama',
+        'União da Serra',
+        'Uruguaiana',
+        'Vacaria',
+        'Vale do Sol',
+        'Vale Real',
+        'Vale Verde',
+        'Vanini',
+        'Venâncio Aires',
+        'Vera Cruz',
+        'Veranópolis',
+        'Vespasiano Correa',
+        'Viadutos',
+        'Viamão',
+        'Vicente Dutra',
+        'Victor Graeff',
+        'Vila Flores',
+        'Vila Lângaro',
+        'Vila Maria',
+        'Vila Nova do Sul',
+        'Vista Alegre',
+        'Vista Alegre do Prata',
+        'Vista Gaúcha',
+        'Vitória das Missões',
+        'Westfália',
+        'Xangri-lá'
+    ];
+}
+
 }; ?>
 {{-- 'residue_type' => $this->residueType, --}}
 <div>
@@ -116,7 +264,8 @@ new class extends Component {
 
             <x-native-select class='z-10' label="Tipo de unidade" placeholder="Select an option"
                 wire:model.defer="pricePerUnit" :options="['Litros', 'Mililitros', 'Gramas', 'Kilos']" />
-            <x-input icon='currency-dollar' label="Valor total da sua oferta (apenas números, use pontos, não vírgulas!)" placeholder="200.00"
+            <x-input icon='currency-dollar'
+                label="Valor total da sua oferta (apenas números, use pontos, não vírgulas!)" placeholder="200.00"
                 wire:model.defer="companyPrice" />
             <x-input multiple type="file" wire:model="companyImage"
                 label='Fotos que deseja mostrar ao cliente. (suas fotos não podem ser maiores que 1,5MB)'
@@ -130,9 +279,10 @@ new class extends Component {
             <div class="col-span-1 sm:col-span-2">
 
                 <div class="col-span-1 sm:col-span-2 sm:grid sm:grid-cols-3 sm:gap-6">
-                    <x-input label="Cidade" class='mb-4' placeholder="Porto Alegre" wire:model.defer="addressCity" />
-                    <x-input label="Estado" class='mb-4' placeholder="Rio Grande do Sul"
-                        wire:model.defer="companyState" />
+                    <x-select label="Cidade" wire:model.defer="addressCity" :options="$this->cities()" class='mb-4' placeholder="Porto Alegre" />
+
+                 
+                    <x-native-select label="Estado" :options="['Rio Grande do Sul']" class='mb-4' wire:model.defer="companyState" />
                     <x-input label="Código postal para entrega (CEP)" placeholder="90215-043"
                         wire:model.defer="companyPostalCode" />
                 </div>
