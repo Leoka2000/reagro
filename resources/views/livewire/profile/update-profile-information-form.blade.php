@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
+use WireUi\Traits\Actions;
 
 new class extends Component {
+    use Actions;
     public string $name = '';
     public string $email = '';
 
@@ -57,8 +59,11 @@ new class extends Component {
         }
 
         $user->save();
-        dd($validated);
-
+        // {{-- dd($validated); --}}
+        $this->dialog()->show([
+            'icon' => 'success',
+            'title' => 'Informações atualizadas!',
+        ]);
         $this->dispatch('profile-updated', name: $user->name);
     }
 
@@ -239,7 +244,7 @@ new class extends Component {
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('
-                                                                                    Informações do Perfil') }}
+                                                                                                Informações do Perfil') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -285,7 +290,7 @@ new class extends Component {
         </div>
         <div class="mt-8">
 
-            <p class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">Seu endereço</p>
+            <p class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">Seu endereço de entrega</p>
 
             <x-input-label for="companyState" class='pb-1' :value="__('Estado')" />
 

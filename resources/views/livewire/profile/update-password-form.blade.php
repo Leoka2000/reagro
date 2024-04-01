@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 use Livewire\Volt\Component;
+use WireUi\Traits\Actions;
 
-new class extends Component
-{
+new class extends Component {
+    use Actions;
     public string $current_password = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -33,7 +34,10 @@ new class extends Component
         ]);
 
         $this->reset('current_password', 'password', 'password_confirmation');
-
+        $this->dialog()->show([
+            'icon' => 'success',
+            'title' => 'Informações atualizadas!',
+        ]);
         $this->dispatch('password-updated');
     }
 }; ?>
@@ -41,31 +45,34 @@ new class extends Component
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-           {{ __('Atualizar Senha') }}
+            {{ __('Atualizar Senha') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-         
-{{ __('Certifique-se de que sua conta está usando uma senha longa e aleatória para garantir segurança.') }}
+
+            {{ __('Certifique-se de que sua conta está usando uma senha longa e aleatória para garantir segurança.') }}
         </p>
     </header>
 
     <form wire:submit="updatePassword" class="mt-6 space-y-6">
         <div>
             <x-input-label for="update_password_current_password" :value="__('Senha Atual')" />
-            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="block w-full mt-1" autocomplete="current-password" />
+            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password"
+                type="password" class="block w-full mt-1" autocomplete="current-password" />
             <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
         </div>
 
         <div>
             <x-input-label for="update_password_password" :value="__('Senha Nova')" />
-            <x-text-input wire:model="password" id="update_password_password" name="password" type="password" class="block w-full mt-1" autocomplete="new-password" />
+            <x-text-input wire:model="password" id="update_password_password" name="password" type="password"
+                class="block w-full mt-1" autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div>
             <x-input-label for="update_password_password_confirmation" :value="__('Confirmar Senha')" />
-            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="block w-full mt-1" autocomplete="new-password" />
+            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation"
+                name="password_confirmation" type="password" class="block w-full mt-1" autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
