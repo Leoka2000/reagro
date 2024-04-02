@@ -4,44 +4,41 @@
             {{ __('Início') }}
         </h2>
     </x-slot>
-    <x-card  class='flex'>
-        <livewire:teste-maps />
-        <livewire:testegeocode />
-    </x-card>
+
     <div class="py-12">
-        <div class="px-4 mx-auto sm:px-6 max-w-7xl lg:px-8">
-            <div
-                class="overflow-hidden bg-white border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:rounded-lg">
-                <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                    <div class="flex items-center">
-                        <div>
-                            <p class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-300">welcome</p>
-                        </div>
+        <div class="flex flex-col max-w-5xl gap-4 px-4 mx-auto sm:px-6 lg:px-8">
+            <x-card class='flex'>
+                <livewire:testegeocode />
+            </x-card>
+            <x-card>
+
+                <div class="flex items-center">
+                    <div>
+                        <p class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-300">welcome</p>
                     </div>
-                    <div class="mt-6">
-                        <p class="text-sm leading-9 text-gray-900 dark:text-gray-300">Aqui virá um texto descritivo sobre
-                            o
-                            marketplace e suas funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas
-                            funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas funcionalidadesAqui
-                            virá um
-                            texto descritivo sobre o marketplace e suas funcionalidadesAqui virá um texto descritivo
-                            sobre o
-                            marketplace e suas funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas
-                            funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas funcionalidadesAqui
-                            virá um
-                            texto descritivo sobre o marketplace e suas funcionalidadesAqui virá um texto descritivo
-                            sobre o
-                            marketplace e suas funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas
-                            funcionalidades
-                        </p>
-                    </div>
+                </div>
+                <div class="mt-6">
+                    <p class="text-sm leading-9 text-gray-900 dark:text-gray-300">Aqui virá um texto descritivo sobre
+                        o
+                        marketplace e suas funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas
+                        funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas funcionalidadesAqui
+                        virá um
+                        texto descritivo sobre o marketplace e suas funcionalidadesAqui virá um texto descritivo
+                        sobre o
+                        marketplace e suas funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas
+                        funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas funcionalidadesAqui
+                        virá um
+                        texto descritivo sobre o marketplace e suas funcionalidadesAqui virá um texto descritivo
+                        sobre o
+                        marketplace e suas funcionalidadesAqui virá um texto descritivo sobre o marketplace e suas
+                        funcionalidades
+                    </p>
 
                 </div>
-            </div>
+            </x-card>
             <main
-                class="flex flex-col items-center justify-center gap-4 mt-4 sm:justify-start sm:flex-row dark:text-gray-300">
-                <div
-                    class='w-full px-8 py-12 bg-white border border-gray-200 rounded-md shadow-md dark:bg-gray-800 dark:border-gray-700 sm:w-96'>
+                class="flex flex-col items-center justify-center gap-4 sm:justify-start sm:flex-row dark:text-gray-300">
+                <x-card>
                     <span><svg width="140" height="140" viewBox="0 0 140 140" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_4014_33508)">
@@ -75,9 +72,8 @@
                     </div>
                     <x-button class='w-full h-12' wire:navigate rounded href="{{ route('notes.sell-index') }}" primary
                         icon="shopping-cart">Quero vender</x-button>
-                </div>
-                <div
-                    class='w-full px-8 py-12 bg-white border border-gray-200 rounded-md shadow-md dark:bg-gray-800 dark:border-gray-700 sm:w-96'>
+                </x-card>
+                <x-card>
                     <span>
                         <svg width="140" height="140" viewBox="0 0 140 140" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +98,7 @@
                     </div>
                     <x-button class='w-full h-12' href="{{ route('notes.buy-index') }}" wire:navigate sp primary rounded
                         icon='eye'>Ver anúncios</x-button>
-                </div>
+                </x-card>
             </main>
         </div>
     </div>

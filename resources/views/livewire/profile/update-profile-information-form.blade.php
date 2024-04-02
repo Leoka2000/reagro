@@ -13,9 +13,6 @@ new class extends Component {
     public string $name = '';
     public string $email = '';
 
-    public string $deliveryAddress = ''; // rua
-    public string $companyPostalCode = '';
-    public string $addressCity = '';
     public string $companyState = '';
 
     /**
@@ -25,9 +22,6 @@ new class extends Component {
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
-        $this->deliveryAddress = Auth::user()->delivery_address;
-        $this->addressCity = Auth::user()->address_city;
-        $this->companyPostalCode = Auth::user()->company_postal_code;
         $this->companyState = Auth::user()->company_state;
     }
 
@@ -42,17 +36,13 @@ new class extends Component {
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
             'companyState' => ['required', 'string'],
-            'addressCity' => ['required', 'string'],
-            'companyPostalCode' => ['required', 'string'],
-            'deliveryAddress' => ['required', 'string', 'min:5'], //street,
+           
         ]);
 
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->company_state = $validated['companyState']; // Make sure this matches your database column name
-        $user->address_city = $validated['addressCity']; // Make sure this matches your database column name
-        $user->company_postal_code = $validated['companyPostalCode']; // Make sure this matches your database column name
-        $user->delivery_address = $validated['deliveryAddress']; // Make sure this matches your database column name
+       
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -92,152 +82,7 @@ new class extends Component {
         return ['Rio Grande do Sul'];
     }
 
-    public function cities()
-    {
-        return [
-            'Porto Alegre',
-            'Caxias do Sul',
-            'Pelotas',
-            'Canoas',
-            'Santa Maria',
-            'Gravataí',
-            'Viamão',
-            'Novo Hamburgo',
-            'São Leopoldo',
-            'Rio Grande',
-            'Alvorada',
-            'Passo Fundo',
-            'Sapucaia do Sul',
-            'Uruguaiana',
-            'Santa Cruz do Sul',
-            'Cachoeirinha',
-            'Bagé',
-            'Bento Gonçalves',
-            'Santa Rosa',
-            'Santa Maria',
-            'Camaquã',
-            'Esteio',
-            'Santana do Livramento',
-            'São Gabriel',
-            'Ijuí',
-            'Alegrete',
-            'Tramandaí',
-            'Capão da Canoa',
-            'São Lourenço do Sul',
-            'Vacaria',
-            'Cachoeira do Sul',
-            'Guaíba',
-            'Santo Ângelo',
-            'Osório',
-            'Farroupilha',
-            'Torres',
-            'Erechim',
-            'Canela',
-            'São Borja',
-            'Montenegro',
-            'Taquara',
-            'Carazinho',
-            'Lajeado',
-            'São Sebastião do Caí',
-            'Rio Pardo',
-            'Santiago',
-            'Venâncio Aires',
-            'São Francisco de Paula',
-            'São Jerônimo',
-            'Igrejinha',
-            'Tapejara',
-            'São José do Norte',
-            'Garibaldi',
-            'São Luiz Gonzaga',
-            'Dom Pedrito',
-            'Tapes',
-            'Encantado',
-            'Sobradinho',
-            'Rolante',
-            'Arroio do Meio',
-            'Marau',
-            'Gramado',
-            'Cidreira',
-            'Constantina',
-            'Teutônia',
-            'Charqueadas',
-            'São Sepé',
-            'Butiá',
-            'Veranópolis',
-            'Carlos Barbosa',
-            'Espumoso',
-            'Ibirubá',
-            'Arroio Grande',
-            'Barra do Ribeiro',
-            'São Borja',
-            'São Marcos',
-            'São Pedro do Sul',
-            'São José dos Ausentes',
-            'São Valentim do Sul',
-            'Cacequi',
-            'São Vicente do Sul',
-            'São João do Polêsine',
-            'São Francisco de Assis',
-            'São Lourenço do Sul',
-            'São Gabriel',
-            'São Miguel das Missões',
-            'São Pedro da Serra',
-            'São Valentim',
-            'Sapiranga',
-            'Sapucaia',
-            'Sarandi',
-            'Seberi',
-            'Sede Nova',
-            'Serafina Corrêa',
-            'Silveira Martins',
-            'Sinimbu',
-            'Sobradinho',
-            'Soledade',
-            'Tabaí',
-            'Tapejara',
-            'Tapes',
-            'Taquara',
-            'Taquari',
-            'Teutônia',
-            'Tio Hugo',
-            'Tramandaí',
-            'Travesseiro',
-            'Três de Maio',
-            'Três Palmeiras',
-            'Três Passos',
-            'Triunfo',
-            'Tucunduva',
-            'Tupanciretã',
-            'Tupandi',
-            'Turvo',
-            'Ubiretama',
-            'União da Serra',
-            'Uruguaiana',
-            'Vacaria',
-            'Vale do Sol',
-            'Vale Real',
-            'Vale Verde',
-            'Vanini',
-            'Venâncio Aires',
-            'Vera Cruz',
-            'Veranópolis',
-            'Vespasiano Correa',
-            'Viadutos',
-            'Viamão',
-            'Vicente Dutra',
-            'Victor Graeff',
-            'Vila Flores',
-            'Vila Lângaro',
-            'Vila Maria',
-            'Vila Nova do Sul',
-            'Vista Alegre',
-            'Vista Alegre do Prata',
-            'Vista Gaúcha',
-            'Vitória das Missões',
-            'Westfália',
-            'Xangri-lá',
-        ];
-    }
+   
 }; ?>
 
 <section>
@@ -299,29 +144,7 @@ new class extends Component {
             <x-input-error :messages="$errors->get('companyState')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
-
-            <x-input-label for="addressCity" class='pb-1' :value="__('Cidade')" />
-
-            <x-select name="addressCity" id="addressCity" wire:model="addressCity" required :options="$this->cities()"
-                class="block w-full" placeholder="Porto Alegre" />
-            <x-input-error :messages="$errors->get('addressCity')" class="mt-2" />
-        </div>
-
-
-        <div class="mt-4">
-            <x-input-label for="deliveryAddress" :value="__('Rua')" />
-            <x-text-input wire:model="deliveryAddress" id="deliveryAddress" class="block w-full mt-1" type="text"
-                name="deliveryAddress" required autocomplete="deliveryAddress" />
-            <x-input-error :messages="$errors->get('deliveryAddress')" class="mt-2" />
-        </div>
-
-        <div class="mt-4">
-            <x-input-label for="companyPostalCode" :value="__('CEP')" />
-            <x-text-input wire:model="companyPostalCode" id="companyPostalCode" class="block w-full mt-1" type="text"
-                name="companyPostalCode" required autocomplete="companyPostalCode" />
-            <x-input-error :messages="$errors->get('companyPostalCode')" class="mt-2" />
-        </div>
+       
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Salvar') }}</x-primary-button>
