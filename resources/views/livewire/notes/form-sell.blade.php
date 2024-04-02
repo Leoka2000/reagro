@@ -265,7 +265,7 @@ new class extends Component {
             <x-native-select class='z-10' label="Tipo de unidade" placeholder="Select an option"
                 wire:model.defer="pricePerUnit" :options="['Litros', 'Mililitros', 'Gramas', 'Kilos']" />
             <x-input icon='currency-dollar'
-                label="Valor total da sua oferta (apenas números, use pontos, não vírgulas!)" placeholder="200.00"
+                label="Valor total da sua oferta (valor numérico, use pontos, não vírgulas.)" placeholder="200.00"
                 wire:model.defer="companyPrice" />
             <x-input multiple type="file" wire:model="companyImage"
                 label='Fotos que deseja mostrar ao cliente. (suas fotos não podem ser maiores que 1,5MB)'

@@ -4,7 +4,7 @@
             {{ __('Início') }}
         </h2>
     </x-slot>
-
+<livewire:teste-maps />
    <div class="py-12">
         <div class="px-4 mx-auto sm:px-6 max-w-7xl lg:px-8">
             <div class="overflow-hidden bg-white border rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:rounded-lg">

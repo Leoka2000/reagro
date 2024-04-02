@@ -32,7 +32,7 @@ class NoteController extends Controller
 
     public function successDialog()
     {
-        error_log('buceta');
+        error_log('uhuuu');
     }
 
     public function viewOffer(Note $note)
