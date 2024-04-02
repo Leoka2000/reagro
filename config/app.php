@@ -185,6 +185,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Geocoder' => Geocoder\Laravel\Facades\Geocoder::class,
     ])->toArray(),
 
 ];

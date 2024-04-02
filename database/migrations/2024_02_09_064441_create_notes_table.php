@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('product_quantity');
             $table->string('postal_code')->nullable();
             $table->string('company_state')->nullable();
+            $table->string('origin_lat')->nullable();
+            $table->string('origin_long')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('delivery_address');     // Delivery address eh na vdd a 'rua'
             $table->decimal('price', 6, 2)->nullable();
