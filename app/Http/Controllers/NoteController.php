@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use http\Env\Response;
 use App\Mail\CompanyMail;
+use App\Mail\PaymentConfirmed;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Models\Order;
@@ -99,7 +100,6 @@ class NoteController extends Controller
         $order->order_residue_type = $note->residue_type;
         $order->company_name = $note->company_name;
 
-        Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $order->order_delivery_address, $order->order_product_name, $order->company_email, $order->order_company_state,  $order->order_address_city, $order->order_postal_code, $order->order_residue_type, $order->company_name, $order->order_product_quantity));
         /*
      $order->company_email = $user->email;
         $order->company_name = $user->name;
@@ -163,7 +163,9 @@ class NoteController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status === 'unpaid') {
                     $order->status = 'paid';
-  
+           
+                    $order->save();
+                    /*
                     $companyEmail = $order->company_email;
                     $productName = $order->order_product_name;
                     $companyState = $order->order_company_state;
@@ -173,9 +175,10 @@ class NoteController extends Controller
                     $residueType = $order->order_residue_type;
                     $companyName = $order->company_name;
                     $productQuantity = $order->order_product_quantity;
-                    $order->save();
-
-                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $companyEmail, $productName, $companyState, $city, $zipCode, $street, $residueType, $companyName,  $productQuantity));
+               
+   */
+                    Mail::to('lreusoliveira@gmail.com')->send(new PaymentConfirmed($order->status));
+                 
                     // setting card status to bought
                     $note = Note::where('company_email', $order->company_email)
                         ->where('product_name', $order->order_product_name)
