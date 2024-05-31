@@ -90,7 +90,6 @@ class NoteController extends Controller
         $order->status = 'unpaid';
         $order->session_id = $session->id;
         $order->company_email = $note->company_email;
-        $order->order_paid = $note->paid; //initially unpaid
         $order->order_company_state = $note->company_state;
         $order->order_product_quantity = $note->product_quantity;
         $order->order_product_name = $note->product_name;
@@ -164,8 +163,6 @@ class NoteController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status === 'unpaid') {
                     $order->status = 'paid';
-
-                    /*
                     $companyEmail = $order->company_email;
                     $productName = $order->order_product_name;
                     $companyState = $order->order_company_state;
@@ -186,11 +183,7 @@ class NoteController extends Controller
                 }
 
                     Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
-                   */
                 }
-
-               
-
 
                 // ... handle other event types
             default:

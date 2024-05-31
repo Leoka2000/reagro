@@ -79,6 +79,8 @@ new class extends Component {
                 'accept_terms' => $this->acceptTerms,
             ]);
 
+            
+
         $this->dialog()->show([
             'icon' => 'success',
             'title' => 'Anúncio publicado!',
