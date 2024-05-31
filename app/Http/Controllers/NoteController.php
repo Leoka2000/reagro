@@ -163,6 +163,7 @@ class NoteController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status === 'unpaid') {
                     $order->status = 'paid';
+  
                     $companyEmail = $order->company_email;
                     $productName = $order->order_product_name;
                     $companyState = $order->order_company_state;
@@ -171,18 +172,19 @@ class NoteController extends Controller
                     $street = $order->order_delivery_address;
                     $residueType = $order->order_residue_type;
                     $companyName = $order->company_name;
+                    $productQuantity = $order->order_product_quantity;
                     $order->save();
 
+                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $companyEmail, $productName, $companyState, $city, $zipCode, $street, $residueType, $companyName,  $productQuantity));
+                    // setting card status to bought
                     $note = Note::where('company_email', $order->company_email)
-                    ->where('product_name', $order->order_product_name)
-                    ->first();
+                        ->where('product_name', $order->order_product_name)
+                        ->first();
 
-                if ($note->paid === 'unpaid') {
-                    $note->paid = 'paid';
-                    $note->save();
-                }
-
-                    Mail::to('lreusoliveira@gmail.com')->send(new CompanyMail($order->status, $street, $productName, $companyEmail, $companyState, $city,  $zipCode, $residueType, $companyName));
+                    if ($note->paid === 'unpaid') {
+                        $note->paid = 'paid';
+                        $note->save();
+                    }
                 }
 
                 // ... handle other event types
