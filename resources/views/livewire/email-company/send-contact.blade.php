@@ -52,7 +52,7 @@ new class extends Component {
             <div
                 class='relative flex flex-col items-center justify-center w-full max-w-4xl gap-2 p-5 mb-2 text-gray-600 bg-white rounded-md dark:bg-gray-800 md:p-12 dark:text-gray-400 '>
 
-                <p class='w-full pr-10 mb-5 text-xl font-bold text-left sm:text-center sm:w-64 dark:text-gray-300'>
+                <p class='w-full pr-10 mb-5 text-xl font-bold text-left sm:text-center dark:text-gray-300'>
                     Há dúvidas? Conte-nos.
                 </p>
 

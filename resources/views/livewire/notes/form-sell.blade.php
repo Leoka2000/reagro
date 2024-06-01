@@ -112,7 +112,7 @@ new class extends Component {
                 </div>
             </div>
 
-            <x-native-select label="Tipo de produto" placeholder="Sólido" :options="['Sólido', 'Líquido', 'Semi-sólido']" wire:model="residueType" />
+            <x-native-select  label="Tipo de produto" placeholder="Sólido" :options="['Sólido', 'Líquido', 'Semi-sólido']" wire:model="residueType" />
 
             {{--    :options="$this->countries()" --}}
 
@@ -120,26 +120,26 @@ new class extends Component {
                 wire:model.defer="pricePerUnit" :options="['Litros', 'Mililitros', 'Gramas', 'Kilos']" />
             <x-input icon='currency-dollar' label="Valor total da sua oferta (apenas números, use pontos, não vírgulas!)" placeholder="200.00"
                 wire:model.defer="companyPrice" />
-            <x-input multiple type="file" wire:model="companyImage"
+            <x-input right-icon='camera' multiple type="file" wire:model="companyImage"
                 label='Fotos que deseja mostrar ao cliente. (suas fotos não podem ser maiores que 1,5MB)'
                 placeholder="Upload de fotos" />
 
 
 
 
-            <x-input label="Rua" placeholder=" Rua Montserrat 12" wire:model.defer="deliveryAddress" /> <x-input
-                label="Quantidade total do produto" placeholder="2 kilos de .... " wire:model.defer="productQuantity" />
+            <x-input icon="map" label="Rua" placeholder=" Rua Montserrat 12" wire:model.defer="deliveryAddress" /> <x-input
+               icon="calculator" label="Quantidade total do produto" placeholder="2 kilos de .... " wire:model.defer="productQuantity" />
             <div class="col-span-1 sm:col-span-2">
 
                 <div class="col-span-1 sm:col-span-2 sm:grid sm:grid-cols-3 sm:gap-6">
-                    <x-input label="Cidade" class='mb-4' placeholder="Porto Alegre" wire:model.defer="addressCity" />
-                    <x-input label="Estado" class='mb-4' placeholder="Rio Grande do Sul"
+                    <x-input icon="map" label="Cidade" class='mb-4' placeholder="Porto Alegre" wire:model.defer="addressCity" />
+                    <x-input icon="map" label="Estado" class='mb-4' placeholder="Rio Grande do Sul"
                         wire:model.defer="companyState" />
-                    <x-input label="Código postal para entrega (CEP)" placeholder="90215-043"
+                    <x-input icon="map" label="Código postal para entrega (CEP)" placeholder="90215-043"
                         wire:model.defer="companyPostalCode" />
                 </div>
                 <div class="flex flex-col gap-6 my-6">
-                    <x-textarea label="Descrição do anúncio" wire:model.defer="companyDescription" />
+                    <x-textarea icon="pencil" label="Descrição do anúncio" wire:model.defer="companyDescription" />
                     <x-toggle label="Eu li e aceito os termos de serviço" class='bb-20'
                         wire:model.defer="acceptTerms" />
                 </div>
@@ -149,10 +149,10 @@ new class extends Component {
 
             </div>
 
-            <x-slot name="footer" class='mt-24'>
-                <div class="flex tp-5 gap-x-3">
+            <x-slot name="footer" class=''>
+                <div class="flex justify-end mt-1">
 
-                    <x-button wire:click="submit" label="Criar" icon='plus' spinner="submit" primary />
+                    <x-button wire:click="submit" label="Criar" right-icon='plus' spinner="submit" primary />
                 </div>
             </x-slot>
     </x-card>

@@ -57,7 +57,7 @@
         <!-- Page Content -->
         <main class="relative">
             <div class='mt-2'>
-                <div class='flex items-center justify-between px-3 sm:px-10 md:px-20'>
+                <div class='flex items-center justify-between px-3 mx-auto max-w-7xl sm:px-6 lg:px-8'>
                     <div x-data="window.themeSwitcher()" x-init="switchTheme()" @keydown.window.tab="switchOn = false"
                         class="flex items-center justify-center space-x-1">
                         <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">

@@ -151,7 +151,7 @@ new class extends Component {
                                                     $firstImage = reset($imageArray);
                                                 @endphp
 
-                                                <img class='object-cover w-full h-full rounded-md bg-slate-300'
+                                                <img class='object-cover w-full rounded-md max-h-80 bg-slate-300'
                                                     src="{{ asset('storage/' . $firstImage) }}" alt="Image"
                                                     title="product image" />
                                             </div>
