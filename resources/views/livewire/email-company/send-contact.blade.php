@@ -69,9 +69,9 @@ new class extends Component {
                     <x-textarea class='text-gray-700 dark:text-gray-400' type="text" id="topic"
                         wire:model.defer="topic" />
 
-                    <x-button class='mt-5' spinner="submit" icon='paper-airplane' primary
+                    <x-button rounded lg class='mt-5' spinner="submit" icon='paper-airplane' primary
                         type="submit">Enviar</x-button>
-                    <x-button.circle class='absolute sm:top-4 top-2 right-2 sm:right-4' md outline  spinner="closeModal"
+                    <x-button.circle xl class='absolute sm:top-4 top-2 right-2 sm:right-4' md outline  spinner="closeModal"
                         icon='x-circle' wire:click='closeModal'>Cancelar</x-button>
                 </form>
 

@@ -32,7 +32,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::view('notes', 'notes.show-notes')
-    ->middleware(['auth'])
+->middleware(['auth'])
     ->name('notes.show-notes');
 
 Route::view('my-notes', 'notes.my-notes')
@@ -48,6 +48,7 @@ Route::view('quero-vender', 'notes.sell-index')
 ->middleware(['auth'])
 ->name('notes.sell-index');
 
+
 Route::get('/auth/google/redirect', [ProviderController::class, 'redirect'] )->name('google-auth');
 Route::get('/auth/google/callback', [ProviderController::class, 'callbackGoogle'] );
 
@@ -59,7 +60,7 @@ Route::get('image-upload', function () {
 });
 
 Route::view('fazer-um-anuncio', 'notes.buy-index')
-    ->middleware(['auth'])
+
     ->name('notes.buy-index');
 
 
@@ -72,7 +73,7 @@ Route::post('/webhook', [NoteController::class, 'webhook'])->name('checkout.webh
     
 
       
-Route::get('notes/view-offer/{note}', [NoteController::class, 'viewOffer'])->name('notes.view-offer');
+Route::get('notes/view-offer/{note}', [NoteController::class, 'viewOffer'])->middleware(['auth'])->name('notes.view-offer');
 
 
 require __DIR__ . '/auth.php';
