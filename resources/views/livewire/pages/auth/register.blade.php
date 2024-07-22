@@ -35,6 +35,13 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
+
+    public function redirectHome(): void
+    {
+
+
+        $this->redirect('/', navigate: true);
+    }
 }; ?>
 
 <div>
@@ -93,4 +100,7 @@ new #[Layout('layouts.guest')] class extends Component
             </x-primary-button>
         </div>
     </form>
+
+
+    <a wire:click='redirectHome'> <x-button icon="arrow-left" rounded class="mt-8 w-full" > Voltar</x-button> </a> 
 </div>

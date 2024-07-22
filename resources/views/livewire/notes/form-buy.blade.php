@@ -79,7 +79,7 @@ new class extends Component {
 
 <div>
     @if ($notes->isEmpty())
-        <div class="text-center dark:text-gray-300">
+        <div class="text-center text-gray-900 dark:text-gray-300">
             <p class="text-xl font-bold">Nenhum anúncio disponível</p>
             <p class="text-sm">Vamos criar o seu primeiro?</p>
             <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Criar um
@@ -102,12 +102,9 @@ new class extends Component {
 
                         </span>
                     </x-slot>
-                    <x-native-select wire:model="selectedType" wire:change="$refresh" icon='filter' label="Selecione">
-                        <option value='None'>Filtro</option>
-                        <option value='Sólido'>Sólido</option>
-                        <option value='Líquido'>Líquido</option>
-                        <option value='Semisólido'>Semisólido</option>
-                    </x-native-select>
+              
+                    <x-native-select  :options="['Sólido', 'Líquido', 'Semi-sólido']"  wire:model="selectedType"  wire:change="$refresh" icon='filter' label="Selecione" />
+                       
                 </x-card>
                 <x-card title="Cidade">
                     <x-slot name="action">
@@ -120,11 +117,10 @@ new class extends Component {
                         </span>
                     </x-slot>
 
-                    <x-native-select wire:model="selectedState" wire:change="$refresh" icon='filter' label="Cidade">
+                    <x-native-select  icon='filter' label="Selecione">
                            <option value='None'>Filtro</option>
                         <option value='Rio Grande do Sul'>Rio Grande do Sul</option>
-                        <option value='Santa Catarina'>Santa Catarina</option>
-                        <option value='Paraná'>Paraná</option>
+                     
                     </x-native-select>
                 </x-card>
 
@@ -151,7 +147,7 @@ new class extends Component {
                                                     $firstImage = reset($imageArray);
                                                 @endphp
 
-                                                <img class='object-cover w-full rounded-md max-h-80 bg-slate-300'
+                                                <img class='object-cover w-full rounded-md h-72 bg-slate-300'
                                                     src="{{ asset('storage/' . $firstImage) }}" alt="Image"
                                                     title="product image" />
                                             </div>

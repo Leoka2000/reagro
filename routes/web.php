@@ -72,7 +72,7 @@ Route::post('/webhook', [NoteController::class, 'webhook'])->name('checkout.webh
     
 
       
-Route::get('notes/view-offer/{note}', [NoteController::class, 'viewOffer'])->name('notes.view-offer');
+Route::get('notes/view-offer/{note}', [NoteController::class, 'viewOffer'])->middleware(['auth'])->name('notes.view-offer');
 
 
 require __DIR__ . '/auth.php';
