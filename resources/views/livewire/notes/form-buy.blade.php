@@ -25,6 +25,13 @@ new class extends Component
         $this->showModal = false;
     }
 
+    public function resetFilters()
+    {
+        $this->selectedType = 'None';
+        $this->selectedState = 'None';
+    }
+
+
     public function delete($noteId)
     {
         $note = Note::where('id', $noteId)->first();
@@ -79,12 +86,10 @@ new class extends Component
 }; ?>
 
 <div>
-    @if ($notes->isEmpty())
-    <div class="text-center dark:text-gray-300">
-        <p class="text-xl font-bold">Nenhum anúncio disponível</p>
-        <p class="text-sm">Vamos criar o seu primeiro?</p>
-        <x-button primary icon="plus" class="mt-6" href="{{ route('notes.sell-index') }}" wire:navigate>Criar um
-            anúncio</x-button>
+@if ($notes->isEmpty())
+    <div class="text-center mt-5 text-gray-900 dark:text-gray-300">
+        <p class="text-xl font-bold">Nenhum anúncio filtrado disponível</p>
+        <x-button primary icon="refresh" class="mt-6" wire:click="resetFilters">Continuar busca</x-button>
     </div>
     @else
     <div>
@@ -130,7 +135,7 @@ new class extends Component
         <main class='my-12'>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($notes as $note)
-                <x-card class='relative bg-teal-200/20 from-white  dark:bg-teal-300/20 dark:bg-gradient-to-bl bg-gradient-to-bl dark:from-gray-900  via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-lg  dark:shadow-none flex  transition-all duration-250 focus:outline focus:outline-2 focus:stroke-teal-500' wire:key='{{ $note->id }}'>
+                <x-card class='relative bg-teal-100/20 from-white  dark:bg-teal-300/20 dark:bg-gradient-to-bl bg-gradient-to-bl dark:from-gray-900  via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-lg  dark:shadow-none flex  transition-all duration-250 focus:outline focus:outline-2 focus:stroke-teal-500' wire:key='{{ $note->id }}'>
 
                     <main class='flex flex-col justify-between h-full '>
                         <div>
@@ -213,12 +218,12 @@ new class extends Component
                                 <x-button.circle sm icon="trash" red outline wire:click="openModal('{{ $note->id }}')"></x-button.circle>
 
                                 @else
-                                <x-button.circle sm icon="trash" red outline wire:click="openModal('{{ $note->id }}')"></x-button.circle>
+                               <div></div>
                                 @endcan
                             </div>
 
                             <div class='w-full my-5'>
-                                <x-button rounded sm class='w-full h-12' href="{{ route('notes.view-offer', $note) }}" icon='shopping-cart' primary spinner label='Quero comprar' />
+                                <x-button rounded sm class='w-full h-12' href="{{ route('notes.view-offer', $note) }}" icon='shopping-cart' primary spinner label='Comprar' />
                             </div>
 
 

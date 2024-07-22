@@ -1,4 +1,4 @@
-<div class="z-10 p-4  sm:fixed bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-gray-900 dark:ring-1 dark:ring-inset dark:ring-white/5  shadow-gray-500/20 dark:shadow-none transition-all duration-250 focus:outline focus:outline-2 focus:stroke-teal-500 flex shadow  items-center  justify-between w-full sm:top-0 sm:right-0 text-end">
+<div class="z-10 p-4  sm:fixed bg-white dark:bg-gray-950/90 dark:bg-gradient-to-bl from-gray-700/50 via-gray-900 dark:ring-1 dark:ring-inset dark:ring-white/5  shadow-gray-500/20 dark:shadow-none transition-all duration-250 focus:outline focus:outline-2 focus:stroke-teal-500 flex shadow  items-center  justify-between w-full sm:top-0 sm:right-0 text-end">
     <div class="flex flex-col justify-center items-center">
         <a wire:click='redirectHome' class='cursor-pointer'>
             <div class='flex items-center justify-center w-16 h-16'>
